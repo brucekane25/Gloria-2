@@ -1,0 +1,20 @@
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Make the Leaflet popup wider */
+.leaflet-popup-content-wrapper {
+  min-width: 470px; /* Set minimum width */
+  max-width: 700px; /* Set maximum width */
+}
+
+.leaflet-popup-content {
+  margin: 0; /* Remove extra margins */
+  width: 100%; /* Ensure it takes full width of the wrapper */
+}
+
+.leaflet-popup-tip {
+  display: none; /* Optionally hide the popup tip/arrow if it's causing alignment issues */
+}
+
