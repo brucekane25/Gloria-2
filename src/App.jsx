@@ -166,7 +166,7 @@ function App() {
     <ThemeProvider theme={theme}>
       <div
         className={`canvas flex-col md:flex-row relative transition-all ${
-          isOpen ? "md:max-w-[72%]" : "w-full"
+          isOpen && window.innerWidth >= 1024 ? "md:max-w-[72%]" : "w-full"
         }`}
       >
         <Navbar
@@ -183,11 +183,14 @@ function App() {
             onEventClick={setSelectedEvent}
           />
         ) : (
-
-          <AlternativeDrawer events={events} onEventClick={setSelectedEvent} isOpen={isOpen} setIsOpen={setIsOpen}/>
-         
+          <AlternativeDrawer
+            events={events}
+            onEventClick={setSelectedEvent}
+            isOpen={isOpen}
+            setIsOpen={setIsOpen}
+          />
         )}
-        <div className={`container-main flex flex-col p-0}`}>
+        <div className={`container-main flex flex-col p-0`}>
           <div className="container-sec flex-grow flex flex-col items-center my-0 px-4 md:px-1 transition-all">
             <div className="slider-cont flex flex-col bg-gray-100/80 px-8 py-2 absolute max-w-fit top-[95px] rounded-full z-[999999999] sm:flex-row items-center justify-around min-w-28">
               <LeftSliders
