@@ -31,7 +31,8 @@ function App() {
   });
   const [selectedEvent, setSelectedEvent] = useState(null);
  const [isOpen, setIsOpen] = useState(false)
-  const colors = {
+ const [isSlider, setIsSlider] = useState(false)
+ const colors = {
     primary: "#aad8aa", // Soft pastel green
     secondary: "#326232", // Soft pink
     background: "#FFE0B2", // Pale peach
@@ -165,13 +166,14 @@ function App() {
   return (
     <ThemeProvider theme={theme}>
       <div
-        className={`canvas flex-col md:flex-row relative transition-all ${
+        className={`canvas  flex-col md:flex-row relative transition-all ${
           isOpen && window.innerWidth >= 1024 ? "md:max-w-[72%]" : "w-full"
         }`}
       >
-        <Navbar
+        <Navbar 
           setSelectedEvent={setSelectedEvent}
           isOpen={isOpen}
+          
           setIsOpen={setIsOpen}
         />
         {window.innerWidth >= 1024 ? (
@@ -183,16 +185,23 @@ function App() {
             onEventClick={setSelectedEvent}
           />
         ) : (
+
+
           <AlternativeDrawer
             events={events}
             onEventClick={setSelectedEvent}
-            isOpen={isOpen}
-            setIsOpen={setIsOpen}
+            isSlider={isSlider}
+            setIsSlider={setIsSlider}
           />
         )}
-        <div className={`container-main flex flex-col p-0`}>
+        <div className={`container-main flex relative flex-col p-0`}>
+          {window.innerWidth <= 1024?(
+            <div className="absolute z-[99] bottom-28 left-[50%] bg-white" >Hello</div>
+
+          ):(<></>)}
+          
           <div className="container-sec flex-grow flex flex-col items-center my-0 px-4 md:px-1 transition-all">
-            <div className="slider-cont flex flex-col bg-gray-100/80 px-8 py-2 absolute max-w-fit top-[95px] rounded-full z-[999999999] sm:flex-row items-center justify-around min-w-28">
+            <div className="slider-cont flex flex-col bg-gray-100/80 px-8 py-2 absolute max-w-fit top-[20px] rounded-full z-[99] sm:flex-row items-center justify-around min-w-28">
               <LeftSliders
                 yearRange={yearRange}
                 setSelectedEvent={setSelectedEvent}
@@ -202,7 +211,7 @@ function App() {
               {/* <RightSliders setLimit={setLimit} colors={colors} pages={pages} currentPage={currentPage} setCurrentPage={setCurrentPage} limit={limit} filterTotalEvents={filterTotalEvents} totalEvents={totalEvents} /> */}
             </div>
   
-            <div className="map h-screen relative w-full mt-4">
+            <div className="map h-screen relative w-full mt-4 -z-0 ">
               <MapComponent events={events} selectedEvent={selectedEvent} />
             </div>
           </div>

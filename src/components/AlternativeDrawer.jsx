@@ -2,18 +2,18 @@ import { SwipeableDrawer, IconButton } from "@mui/material";
 import MenuIcon from "@mui/icons-material/Menu";
 import { useState } from "react";
 
-const AlternativeDrawer = ({ isOpen, setIsOpen, events, onEventClick }) => {
+const AlternativeDrawer = ({ isSlider, setIsSlider, events, onEventClick }) => {
   return (
     <>
       <SwipeableDrawer
         anchor="bottom"
-        open={isOpen}
-        onClose={() => setIsOpen(false)}
-        onOpen={() => setIsOpen(true)}
+        open={isSlider}
+        onClose={() => setIsSlider(false)}
+        onOpen={() => setIsSlider(true)}
         swipeAreaWidth={20} // Adjust the swipe area width
         sx={{
           "& .MuiDrawer-paper": {
-            backgroundColor: "#f7f7f7",
+            backgroundColor: "rgba(0,0,0,0.5)",
             boxShadow: "0 0 10px rgba(0, 0, 0, 0.1)",
           },
         }}
@@ -22,7 +22,7 @@ const AlternativeDrawer = ({ isOpen, setIsOpen, events, onEventClick }) => {
         <div className="flex items-center mt-3 px-4 justify-between">
           <h2 className="text-lg font-semibold">Events</h2>
           <IconButton
-            onClick={() => setIsOpen(false)}
+            onClick={() => setIsSlider(false)}
             aria-label="close drawer"
           >
             <MenuIcon />
