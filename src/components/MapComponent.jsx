@@ -73,7 +73,7 @@ const MapComponent = ({ events, selectedEvent }) => {
           />
         </LayersControl.Overlay>
 
-        <LayersControl.Overlay  name="MapTiler">
+        <LayersControl.Overlay checked name="MapTiler">
           <TileLayer
             attribution='<a href="https://www.maptiler.com/copyright">MapTiler</a>'
             // url={`https://api.maptiler.com/tiles/satellite-v2/{z}/{x}/{y}.jpg?key=2b4nj2gRRkpUERQZxBXB`}
@@ -88,7 +88,7 @@ const MapComponent = ({ events, selectedEvent }) => {
           />
         </LayersControl.Overlay>
 
-        <LayersControl.Overlay checked name="CartoCDN-dark">
+        <LayersControl.Overlay name="CartoCDN-dark">
           <TileLayer
             attribution='<a href="https://www.maptiler.com/copyright">ThunderForestMaps</a>'
             url="https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png"
@@ -135,7 +135,7 @@ const MapComponent = ({ events, selectedEvent }) => {
             }}
           >
             <Popup>
-              <div className="min-w-[470px] max-w-2xl p-4 bg-white rounded-lg shadow-2xl">
+              <div className="min-w-[370px] max-w-2xl p-4 bg-white rounded-lg shadow-2xl">
                 <div className="flex flex-row gap-6">
                   {/* Thumbnail */}
                   {event.thumbnail && (

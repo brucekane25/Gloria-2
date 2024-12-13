@@ -5,7 +5,7 @@
 
 /* Make the Leaflet popup wider */
 .leaflet-popup-content-wrapper {
-  min-width: 470px; /* Set minimum width */
+  min-width: 370px; /* Set minimum width */
   max-width: 700px; /* Set maximum width */
 }
 
