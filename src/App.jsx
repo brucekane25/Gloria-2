@@ -196,7 +196,7 @@ function App() {
         )}
         <div className={`container-main flex relative flex-col p-0`}>
           {window.innerWidth <= 1024?(
-            <div className="absolute z-[99] bottom-28 left-[50%] bg-white" >Hello</div>
+            <div className="absolute z-[99] bottom-28 left-[45%] bg-white" >Hello</div>
 
           ):(<></>)}
           
