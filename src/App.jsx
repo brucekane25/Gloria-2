@@ -197,18 +197,21 @@ function App() {
         <div className={`container-main flex relative flex-col p-0`}>
           {window.innerWidth <= 1024?(
             <div className="absolute z-[99] bottom-28 left-[45%] bg-white" >Hello</div>
-
+            
           ):(<></>)}
           
           <div className="container-sec flex-grow flex flex-col items-center my-0 px-4 md:px-1 transition-all">
             <div className="slider-cont flex flex-col bg-gray-100/80 px-8 py-2 absolute max-w-fit top-[20px] rounded-full z-[99] sm:flex-row items-center justify-around min-w-28">
-              <LeftSliders
-                yearRange={yearRange}
-                setSelectedEvent={setSelectedEvent}
-                setYearRange={setYearRange}
-                setSelectedCategory={setSelectedCategory}
-              />
-              {/* <RightSliders setLimit={setLimit} colors={colors} pages={pages} currentPage={currentPage} setCurrentPage={setCurrentPage} limit={limit} filterTotalEvents={filterTotalEvents} totalEvents={totalEvents} /> */}
+          {window.innerWidth >= 1024?(
+            <LeftSliders
+            yearRange={yearRange}
+            setSelectedEvent={setSelectedEvent}
+            setYearRange={setYearRange}
+            setSelectedCategory={setSelectedCategory}
+            />
+          ):(<></>)}
+
+          {/* <RightSliders setLimit={setLimit} colors={colors} pages={pages} currentPage={currentPage} setCurrentPage={setCurrentPage} limit={limit} filterTotalEvents={filterTotalEvents} totalEvents={totalEvents} /> */}
             </div>
   
             <div className="map h-screen relative w-full mt-4 -z-0 ">
