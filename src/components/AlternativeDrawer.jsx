@@ -10,12 +10,14 @@ const AlternativeDrawer = ({ isSlider, setIsSlider, events, onEventClick }) => {
         open={isSlider}
         onClose={() => setIsSlider(false)}
         onOpen={() => setIsSlider(true)}
+        
         swipeAreaWidth={20} // Adjust the swipe area width
         sx={{
           "& .MuiDrawer-paper": {
             backgroundColor: "rgba(0,0,0,0.5)",
             boxShadow: "0 0 10px rgba(0, 0, 0, 0.1)",
           },
+          
         }}
       >
         {/* Drawer Header */}

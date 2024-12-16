@@ -174,65 +174,67 @@ function App() {
   //     </div>
   //   </ThemeProvider>
   // );
-  
-  return (
+return (
     <ThemeProvider theme={theme}>
-      <div
-        className={`canvas h-screen w-screen flex-col md:flex-row relative transition-all ${
-          isOpen && window.innerWidth >= 1024 ? "md:max-w-[72%]" : "w-full"
-        }`}
-      >
-        {/* Only show Navbar on larger screens */}
-        {window.innerWidth >= 1024 && (
-          <Navbar 
-            setSelectedEvent={setSelectedEvent}
-            isOpen={isOpen}
-            setIsOpen={setIsOpen}
-          />
-        )}
 
-        {window.innerWidth >= 1024 ? (
-          <Drawer
-            setIsOpen={setIsOpen}
-            isOpen={isOpen}
-            events={randomEvents}
-            randomizeEvents={randomizeEvents}
-            onEventClick={setSelectedEvent}
-          />
-        ) : (
-          <AlternativeDrawer
-            events={events}
-            onEventClick={setSelectedEvent}
-            isSlider={isSlider}
-            setIsSlider={setIsSlider}
-          />
-        )}
-
-        <div className={`container-main flex relative flex-col p-0`}>
-          {window.innerWidth <= 1024 && (
-            <div className="absolute z-[99] bottom-28 left-[45%] bg-white">
-              Hello
-            </div>
+      <div className="main-cont h-screen w-screen overflow-hidden">
+        <div className={`cont-1 flex flex-col md:flex-row relative transition-all h-full ${
+            isOpen && window.innerWidth >= 1024 ? "md:max-w-[72%]" : "w-full"
+          }`}
+        >
+          {/* Only show Navbar on larger screens */}
+          {window.innerWidth >= 1024 && (
+            <Navbar setSelectedEvent={setSelectedEvent} isOpen={isOpen} setIsOpen={setIsOpen}/>
           )}
-          
-          <div className="container-sec flex-grow flex flex-col items-center my-0 px-4 md:px-1 transition-all">
-            <div className="slider-cont flex flex-col bg-gray-100/80 px-8 py-2 absolute max-w-fit top-[20px] rounded-full z-[99] sm:flex-row items-center justify-around min-w-28">
-              {window.innerWidth >= 1024 ? (
-                <LeftSliders
-                  yearRange={yearRange}
-                  setSelectedEvent={setSelectedEvent}
-                  setYearRange={setYearRange}
-                  setSelectedCategory={setSelectedCategory}
+
+          {/* Conditional rendering of Drawer vs AlternativeDrawer based on screen size */}
+          {window.innerWidth >= 1024 ? (
+            <Drawer setIsOpen={setIsOpen} isOpen={isOpen} events={randomEvents} randomizeEvents={randomizeEvents} onEventClick={setSelectedEvent} />
+          ) : (
+            <AlternativeDrawer events={events} onEventClick={setSelectedEvent} isSlider={isSlider} setIsSlider={setIsSlider}/>
+          )}
+
+          {/* Main Content Container */}
+          <div className="cont-2 flex-1 flex flex-col relative">
+            {/* Mobile Random Events Button */}
+            {window.innerWidth < 1024 && (
+              <div className="absolute z-[999999] bottom-28 left-1/2 -translate-x-1/2">
+                <button onClick={() => setIsSlider(true)}
+                  className="bg-white px-6 py-2 rounded-full shadow-lg"
+                >
+                  Random Events
+                </button>
+              </div>
+            )}
+            
+            {/* Content Section */}
+            <div className="flex-1 flex flex-col items-center relative">
+              {/* Controls Container */}
+              <div className="absolute top-4 left-1/2 -translate-x-1/2 z-[99] 
+                            bg-gray-100/80 px-4 sm:px-8 py-2 rounded-full 
+                            w-fit max-w-[90vw] sm:max-w-fit">
+                {window.innerWidth >= 1024 ? (
+                  <LeftSliders yearRange={yearRange}
+                    setSelectedEvent={setSelectedEvent}
+                    setYearRange={setYearRange}
+                    setSelectedCategory={setSelectedCategory}
+                  />
+                ) : (
+                  <div className="text-center text-sm sm:text-base font-medium">
+                    Exploring Historical Events
+                  </div>
+                )}
+              </div>
+
+              {/* Map Container - Full screen for mobile, full container for desktop */}
+              <div className={`${window.innerWidth >= 1024 
+                  ? "w-full h-full" 
+                  : "fixed inset-0 w-screen h-screen"
+              }`}>
+                <MapComponent events={events} 
+                  selectedEvent={selectedEvent} 
                 />
-              ) : (
-                <div className="text-center text-sm sm:text-base font-medium">
-                  Exploring Historical Events
-                </div>
-              )}
-            </div>
-  
-            <div className="map h-screen relative w-full mt-4 -z-0">
-              <MapComponent events={events} selectedEvent={selectedEvent} />
+              </div>  
             </div>
           </div>
         </div>
