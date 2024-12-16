@@ -199,7 +199,7 @@ return (
             {/* Mobile Random Events Button */}
             {window.innerWidth < 1024 && (
               <div className="absolute z-[999999] bottom-28 left-1/2 -translate-x-1/2">
-                <button onClick={() => setIsSlider(true)}
+                <button onClick={() => setIsSlider(!isSlider)}
                   className="bg-white px-6 py-2 rounded-full shadow-lg"
                 >
                   Random Events
