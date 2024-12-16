@@ -1,3 +1,5 @@
+// /home/belal/Desktop/Frontend/src/components/Navbar.jsx
+
 import * as React from 'react';
 import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
@@ -12,7 +14,6 @@ import Button from '@mui/material/Button';
 import Tooltip from '@mui/material/Tooltip';
 import MenuItem from '@mui/material/MenuItem';
 import AdbIcon from '@mui/icons-material/Adb';
-import { hexToRgb } from '@mui/material';
 
 const pages = ['Globe', 'Portfolio', 'Blog'];
 const settings = ['Github Profile', 'Account', 'Dashboard'];
@@ -37,7 +38,7 @@ function Navbar({isOpen, setSelectedEvent, setIsOpen}) {
   };
 
   return (
-    <AppBar position="sticky" >
+    <AppBar position="sticky" sx={{ height: 'fit-content' }}>  {/* Added height: 'auto' here */}
       <Container maxWidth="xl">
         <Toolbar disableGutters>
           <AdbIcon sx={{ display: { xs: 'none', md: 'flex' }, mr: 1 }} />
@@ -53,12 +54,12 @@ function Navbar({isOpen, setSelectedEvent, setIsOpen}) {
               letterSpacing: '.3rem',
               color: 'inherit',
               textDecoration: 'none',
+              cursor: 'pointer', // Added for better UX
             }}
-              onClick={() =>{ 
-                setIsOpen(!isOpen);
-                setSelectedEvent(null);
-                }
-              }
+            onClick={() =>{ 
+              setIsOpen(!isOpen);
+              setSelectedEvent(null);
+            }}
           >
             Historia
           </Typography>
@@ -161,4 +162,5 @@ function Navbar({isOpen, setSelectedEvent, setIsOpen}) {
     </AppBar>
   );
 }
+
 export default Navbar;

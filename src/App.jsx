@@ -115,67 +115,82 @@ function App() {
   };
 
 
-  // return (<>
-  
-  //   <ThemeProvider theme={theme}>
-  //     <div className={`canvas w-full `}>
-  //       <Navbar setSelectedEvent={setSelectedEvent} isOpen={isOpen} setIsOpen={setIsOpen}  />
-  //       <Drawer
-  //         setIsOpen={setIsOpen}
-  //         isOpen={isOpen}
-  //         events={randomEvents}
-  //         randomizeEvents={randomizeEvents}
-  //         onEventClick={setSelectedEvent}
-  //       />
-  //       <div className={`container flex p-0 absolute transition-all ${isOpen ? "w-750px" : "w-full"}`}>
-  //         <div
-  //           className={`flex-grow flex flex-col items-center px-2 transition-all `}
-  //         >
-  //           <div className= {` Slider-Cont flex items-center pt-4 justify-around w-full`} >
-  //             <LeftSliders yearRange={yearRange} setSelectedEvent={setSelectedEvent} setYearRange={setYearRange} setSelectedCategory={setSelectedCategory} />
-  //             <RightSliders  setLimit={setLimit} colors={colors} pages={pages} currentPage={currentPage} setCurrentPage={setCurrentPage} limit={limit} filterTotalEvents={filterTotalEvents} totalEvents={totalEvents} />
-  //           </div>
-  //           <MapComponent events={events} selectedEvent={selectedEvent} />
-  //         </div>
-  //       </div>
-  //     </div>
-  //   </ThemeProvider>
-  //   </>  );
   // return (
   //   <ThemeProvider theme={theme}>
-  //     <div className={`canvas flex-col md:flex-row relative transition-all ${isOpen ? "md:max-w-[72%]" : "w-full"}`}>
+  //     <div
+  //       className={`canvas  flex-col md:flex-row relative transition-all ${
+  //         isOpen && window.innerWidth >= 1024 ? "md:max-w-[72%]" : "w-full"
+  //       }`}
+  //     >
+  //       <Navbar 
+  //         setSelectedEvent={setSelectedEvent}
+  //         isOpen={isOpen}
+          
+  //         setIsOpen={setIsOpen}
+  //       />
+  //       {window.innerWidth >= 1024 ? (
+  //         <Drawer
+  //           setIsOpen={setIsOpen}
+  //           isOpen={isOpen}
+  //           events={randomEvents}
+  //           randomizeEvents={randomizeEvents}
+  //           onEventClick={setSelectedEvent}
+  //         />
+  //       ) : (
+
+
+  //         <AlternativeDrawer
+  //           events={events}
+  //           onEventClick={setSelectedEvent}
+  //           isSlider={isSlider}
+  //           setIsSlider={setIsSlider}
+  //         />
+  //       )}
+  //       <div className={`container-main flex relative flex-col p-0`}>
+  //         {window.innerWidth <= 1024?(
+  //           <div className="absolute z-[99] bottom-28 left-[45%] bg-white" >Hello</div>
+            
+  //         ):(<></>)}
+          
+  //         <div className="container-sec flex-grow flex flex-col items-center my-0 px-4 md:px-1 transition-all">
+  //           <div className="slider-cont flex flex-col bg-gray-100/80 px-8 py-2 absolute max-w-fit top-[20px] rounded-full z-[99] sm:flex-row items-center justify-around min-w-28">
+  //         {window.innerWidth >= 1024?(
+  //           <LeftSliders
+  //           yearRange={yearRange}
+  //           setSelectedEvent={setSelectedEvent}
+  //           setYearRange={setYearRange}
+  //           setSelectedCategory={setSelectedCategory}
+  //           />
+  //         ):(<></>)}
+
+  //         {/* <RightSliders setLimit={setLimit} colors={colors} pages={pages} currentPage={currentPage} setCurrentPage={setCurrentPage} limit={limit} filterTotalEvents={filterTotalEvents} totalEvents={totalEvents} /> */}
+  //           </div>
   
-  //       <Navbar setSelectedEvent={setSelectedEvent} isOpen={isOpen} setIsOpen={setIsOpen} />
-  //       <Drawer setIsOpen={setIsOpen} isOpen={isOpen} events={randomEvents} randomizeEvents={randomizeEvents} onEventClick={setSelectedEvent}/>
-  //      <div className={`container-main flex flex-col p-0}`}>
-  //         <div className="container-sec flex-grow flex flex-col items-center px-4 md:px-2 transition-all">
-  //             <div className="slider-cont flex flex-col sm:flex-row items-center justify-around w-full">
-  //               <LeftSliders yearRange={yearRange} setSelectedEvent={setSelectedEvent} setYearRange={setYearRange} setSelectedCategory={setSelectedCategory}/>
-  //              {/* <RightSliders setLimit={setLimit} colors={colors} pages={pages} currentPage={currentPage} setCurrentPage={setCurrentPage} limit={limit} filterTotalEvents={filterTotalEvents} totalEvents={totalEvents} /> */}
-  //              </div>
-  
-  //            <div className="map w-full mt-4">
-  //               <MapComponent events={events} selectedEvent={selectedEvent} />
-  //            </div>
+  //           <div className="map h-screen relative w-full mt-4 -z-0 ">
+  //             <MapComponent events={events} selectedEvent={selectedEvent} />
+  //           </div>
   //         </div>
   //       </div>
   //     </div>
   //   </ThemeProvider>
   // );
-
+  
   return (
     <ThemeProvider theme={theme}>
       <div
-        className={`canvas  flex-col md:flex-row relative transition-all ${
+        className={`canvas h-screen w-screen flex-col md:flex-row relative transition-all ${
           isOpen && window.innerWidth >= 1024 ? "md:max-w-[72%]" : "w-full"
         }`}
       >
-        <Navbar 
-          setSelectedEvent={setSelectedEvent}
-          isOpen={isOpen}
-          
-          setIsOpen={setIsOpen}
-        />
+        {/* Only show Navbar on larger screens */}
+        {window.innerWidth >= 1024 && (
+          <Navbar 
+            setSelectedEvent={setSelectedEvent}
+            isOpen={isOpen}
+            setIsOpen={setIsOpen}
+          />
+        )}
+
         {window.innerWidth >= 1024 ? (
           <Drawer
             setIsOpen={setIsOpen}
@@ -185,8 +200,6 @@ function App() {
             onEventClick={setSelectedEvent}
           />
         ) : (
-
-
           <AlternativeDrawer
             events={events}
             onEventClick={setSelectedEvent}
@@ -194,27 +207,31 @@ function App() {
             setIsSlider={setIsSlider}
           />
         )}
+
         <div className={`container-main flex relative flex-col p-0`}>
-          {window.innerWidth <= 1024?(
-            <div className="absolute z-[99] bottom-28 left-[45%] bg-white" >Hello</div>
-            
-          ):(<></>)}
+          {window.innerWidth <= 1024 && (
+            <div className="absolute z-[99] bottom-28 left-[45%] bg-white">
+              Hello
+            </div>
+          )}
           
           <div className="container-sec flex-grow flex flex-col items-center my-0 px-4 md:px-1 transition-all">
             <div className="slider-cont flex flex-col bg-gray-100/80 px-8 py-2 absolute max-w-fit top-[20px] rounded-full z-[99] sm:flex-row items-center justify-around min-w-28">
-          {window.innerWidth >= 1024?(
-            <LeftSliders
-            yearRange={yearRange}
-            setSelectedEvent={setSelectedEvent}
-            setYearRange={setYearRange}
-            setSelectedCategory={setSelectedCategory}
-            />
-          ):(<></>)}
-
-          {/* <RightSliders setLimit={setLimit} colors={colors} pages={pages} currentPage={currentPage} setCurrentPage={setCurrentPage} limit={limit} filterTotalEvents={filterTotalEvents} totalEvents={totalEvents} /> */}
+              {window.innerWidth >= 1024 ? (
+                <LeftSliders
+                  yearRange={yearRange}
+                  setSelectedEvent={setSelectedEvent}
+                  setYearRange={setYearRange}
+                  setSelectedCategory={setSelectedCategory}
+                />
+              ) : (
+                <div className="text-center text-sm sm:text-base font-medium">
+                  Exploring Historical Events
+                </div>
+              )}
             </div>
   
-            <div className="map h-screen relative w-full mt-4 -z-0 ">
+            <div className="map h-screen relative w-full mt-4 -z-0">
               <MapComponent events={events} selectedEvent={selectedEvent} />
             </div>
           </div>
@@ -222,8 +239,7 @@ function App() {
       </div>
     </ThemeProvider>
   );
-  
-  
+
 }
 
 export default App;
