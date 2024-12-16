@@ -198,7 +198,7 @@ return (
           <div className="cont-2 flex-1 flex flex-col relative">
             {/* Mobile Random Events Button */}
             {window.innerWidth < 1024 && (
-              <div className="absolute z-[999999] bottom-28 left-1/2 -translate-x-1/2">
+              <div className="absolute z-[999] bottom-28 left-1/2 -translate-x-1/2">
                 <button onClick={() => setIsSlider(!isSlider)}
                   className="bg-white px-6 py-2 rounded-full shadow-lg"
                 >
