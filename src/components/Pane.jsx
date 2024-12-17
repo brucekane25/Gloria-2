@@ -12,7 +12,7 @@ const Pane = ({ isOpen, setIsOpen, events, randomizeEvents, onEventClick }) => {
         open={isOpen}
         sx={{
           "& .MuiDrawer-paper": {
-            width:'28%', // Adjust the width as needed
+            width:'30%', // Adjust the width as needed
             backgroundColor: "#f7f7f7",
             boxShadow: "0 0 30px rgba(0, 0, 0, 0.1)",
           },

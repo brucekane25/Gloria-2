@@ -66,6 +66,7 @@ const RangeSlider = ({ setSelectedEvent, yearRange, setYearRange }) => {
             getAriaLabel={() => 'Year range'}
             value={temporaryRange}
             onChange={handleChange}
+            orientation='horizontal'
             onChangeCommitted={handleChangeCommitted}
             valueLabelDisplay="on"
             min={-1458}

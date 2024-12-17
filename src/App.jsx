@@ -15,6 +15,7 @@ import LeftSliders from "./components/LeftSliders";
 import RightSliders from "./components/RightSliders";
 import AlternativeDrawer from "./components/AlternativeDrawer";
 import { useMediaQuery } from "@mui/material";
+import BottomAppBar from "./components/BottomBar";
 function App() {
   const [events, setEvents] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
@@ -117,8 +118,8 @@ function App() {
   return (
     <ThemeProvider theme={theme}>
       <div className="main-cont h-screen w-screen overflow-hidden">
-        <div className={`canvas flex flex-col relative transition-all h-full ${isDesktop && isOpen ? "max-w-[72%]" : "w-full"}`}>
-          {isDesktop && <Navbar setSelectedEvent={setSelectedEvent} isOpen={isOpen} setIsOpen={setIsOpen} />}
+        <div className={`canvas flex flex-col relative transition-all h-full ${isDesktop && isOpen ? "max-w-[70%]" : "w-full"}`}>
+          {isDesktop?( <Navbar setSelectedEvent={setSelectedEvent} isOpen={isOpen} setIsOpen={setIsOpen} />):(<BottomAppBar/>)}
           <div className="sliders-cont absolute flex flex-col items-center left-1/2 -translate-x-1/2 top-20 z-[999]">
             {isDesktop ? (
               <div className="bg-gray-100/80 px-1 minhf rounded-full w-fit max-w-fit">
