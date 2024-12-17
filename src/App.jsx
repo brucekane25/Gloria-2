@@ -5,7 +5,7 @@ import apiClient from "./api/axios";
 import CategoryDropdown from "./components/CategoryDropdown";
 import Navbar from "./components/Navbar";
 import RangeSlider from "./components/RangeSlider";
-import { IconButton, rgbToHex } from "@mui/material";
+import Backdrop from "./components/Backdrop";
 import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
 import Drawer from "./components/Pane";
@@ -16,6 +16,7 @@ import RightSliders from "./components/RightSliders";
 import AlternativeDrawer from "./components/AlternativeDrawer";
 import { useMediaQuery } from "@mui/material";
 import BottomAppBar from "./components/BottomBar";
+import ChipsArray from "./components/CategoryChip";
 function App() {
   const [events, setEvents] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
@@ -69,10 +70,13 @@ function App() {
     setSelectedEvent(null);
   };
 
+  const [open, setOpen] = useState(false);
+
+  
   useEffect(() => {
     randomizeEvents();
   }, [events]);
-
+  
   useEffect(() => {
     const fetchData = async () => {
       const data = await fetchEventsWithCoordinates(
@@ -81,14 +85,15 @@ function App() {
         yearRange.startYear,
         yearRange.endYear
       );
+      setOpen(false)
       if (data) {
         const categorizedEvents = await categorizeEvents(data.events);
         const filterEvents = selectedCategory
-          ? categorizedEvents.filter(
-              (event) => event.category === selectedCategory
-            )
-          : categorizedEvents;
-
+        ? categorizedEvents.filter(
+          (event) => event.category === selectedCategory
+        )
+        : categorizedEvents;
+        
         setEvents(filterEvents);
         setPages(data.totalPages);
         setTotalEvents(data.totalEvents);
@@ -98,13 +103,14 @@ function App() {
     fetchData();
     setSelectedEvent(null);
   }, [currentPage, yearRange, selectedCategory, limit]);
-
+  
   const fetchEventsWithCoordinates = async (
     page,
     limit,
     startYear,
     endYear
   ) => {
+    setOpen(true);
     try {
       const response = await apiClient.get("/coordinates", {
         params: { page, limit, startYear, endYear },
@@ -122,16 +128,18 @@ function App() {
           {isDesktop?( <Navbar setSelectedEvent={setSelectedEvent} isOpen={isOpen} setIsOpen={setIsOpen} />):(<BottomAppBar/>)}
           <div className="sliders-cont absolute flex flex-col items-center left-1/2 -translate-x-1/2 top-20 z-[999]">
             {isDesktop ? (
-              <div className="bg-gray-100/80 px-1 minhf rounded-full w-fit max-w-fit">
+              <div className="bg-gray-100/80 px-4 min-h-full rounded-full w-fit max-w-fit">
                 <LeftSliders
                   yearRange={yearRange}
                   setSelectedEvent={setSelectedEvent}
                   setYearRange={setYearRange}
                   setSelectedCategory={setSelectedCategory}
-                />
+                  />
+          {/* <ChipsArray/> */}
               </div>
             ) : (
-              <></>
+              <>
+              </>
             )}
           </div>
           {isDesktop ? (
@@ -147,6 +155,7 @@ function App() {
             </div>
           )}
           <div className="relative  h-full w-full">
+<Backdrop open={open} setOpen={setOpen}/>
             <MapComponent events={events} selectedEvent={selectedEvent} />
           </div>
         </div>
