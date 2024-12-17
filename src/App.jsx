@@ -14,7 +14,7 @@ import { red } from "@mui/material/colors";
 import LeftSliders from "./components/LeftSliders";
 import RightSliders from "./components/RightSliders";
 import AlternativeDrawer from "./components/AlternativeDrawer";
-
+import { useMediaQuery } from "@mui/material";
 function App() {
   const [events, setEvents] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
@@ -23,7 +23,8 @@ function App() {
   const [limit, setLimit] = useState(1000);
   const [selectedCategory, setSelectedCategory] = useState("");
   const [randomEvents, setRandomEvents] = useState([]);
-  const [totalEvents, setTotalEvents] = useState(null);
+  const [totalEvents, setTotalEvents] = useState(null); 
+  const isDesktop = useMediaQuery("(min-width: 1024px)");
   const [filterTotalEvents, setFilterTotalEvents] = useState(null);
   const [yearRange, setYearRange] = useState({
     startYear: 500,
@@ -113,135 +114,101 @@ function App() {
       return null;
     }
   };
-
-
-  // return (
-  //   <ThemeProvider theme={theme}>
-  //     <div
-  //       className={`canvas  flex-col md:flex-row relative transition-all ${
-  //         isOpen && window.innerWidth >= 1024 ? "md:max-w-[72%]" : "w-full"
-  //       }`}
-  //     >
-  //       <Navbar 
-  //         setSelectedEvent={setSelectedEvent}
-  //         isOpen={isOpen}
-          
-  //         setIsOpen={setIsOpen}
-  //       />
-  //       {window.innerWidth >= 1024 ? (
-  //         <Drawer
-  //           setIsOpen={setIsOpen}
-  //           isOpen={isOpen}
-  //           events={randomEvents}
-  //           randomizeEvents={randomizeEvents}
-  //           onEventClick={setSelectedEvent}
-  //         />
-  //       ) : (
-
-
-  //         <AlternativeDrawer
-  //           events={events}
-  //           onEventClick={setSelectedEvent}
-  //           isSlider={isSlider}
-  //           setIsSlider={setIsSlider}
-  //         />
-  //       )}
-  //       <div className={`container-main flex relative flex-col p-0`}>
-  //         {window.innerWidth <= 1024?(
-  //           <div className="absolute z-[99] bottom-28 left-[45%] bg-white" >Hello</div>
-            
-  //         ):(<></>)}
-          
-  //         <div className="container-sec flex-grow flex flex-col items-center my-0 px-4 md:px-1 transition-all">
-  //           <div className="slider-cont flex flex-col bg-gray-100/80 px-8 py-2 absolute max-w-fit top-[20px] rounded-full z-[99] sm:flex-row items-center justify-around min-w-28">
-  //         {window.innerWidth >= 1024?(
-  //           <LeftSliders
-  //           yearRange={yearRange}
-  //           setSelectedEvent={setSelectedEvent}
-  //           setYearRange={setYearRange}
-  //           setSelectedCategory={setSelectedCategory}
-  //           />
-  //         ):(<></>)}
-
-  //         {/* <RightSliders setLimit={setLimit} colors={colors} pages={pages} currentPage={currentPage} setCurrentPage={setCurrentPage} limit={limit} filterTotalEvents={filterTotalEvents} totalEvents={totalEvents} /> */}
-  //           </div>
-  
-  //           <div className="map h-screen relative w-full mt-4 -z-0 ">
-  //             <MapComponent events={events} selectedEvent={selectedEvent} />
-  //           </div>
-  //         </div>
-  //       </div>
-  //     </div>
-  //   </ThemeProvider>
-  // );
-return (
+  return (
     <ThemeProvider theme={theme}>
-
       <div className="main-cont h-screen w-screen overflow-hidden">
-        <div className={`cont-1 flex flex-col md:flex-row relative transition-all h-full ${
-            isOpen && window.innerWidth >= 1024 ? "md:max-w-[72%]" : "w-full"
-          }`}
-        >
-          {/* Only show Navbar on larger screens */}
-          {window.innerWidth >= 1024 && (
-            <Navbar setSelectedEvent={setSelectedEvent} isOpen={isOpen} setIsOpen={setIsOpen}/>
-          )}
-
-          {/* Conditional rendering of Drawer vs AlternativeDrawer based on screen size */}
-          {window.innerWidth >= 1024 ? (
+        <div className={`canvas flex flex-col relative transition-all h-full ${isDesktop && isOpen ? "max-w-[72%]" : "w-full"}`}>
+          {isDesktop && <Navbar setSelectedEvent={setSelectedEvent} isOpen={isOpen} setIsOpen={setIsOpen} />}
+          <div className="sliders-cont absolute flex flex-col items-center left-1/2 -translate-x-1/2 top-20 z-[999]">
+            {isDesktop ? (
+              <div className="bg-gray-100/80 px-1 minhf rounded-full w-fit max-w-fit">
+                <LeftSliders
+                  yearRange={yearRange}
+                  setSelectedEvent={setSelectedEvent}
+                  setYearRange={setYearRange}
+                  setSelectedCategory={setSelectedCategory}
+                />
+              </div>
+            ) : (
+              <>Hello</>
+            )}
+          </div>
+          {isDesktop ? (
             <Drawer setIsOpen={setIsOpen} isOpen={isOpen} events={randomEvents} randomizeEvents={randomizeEvents} onEventClick={setSelectedEvent} />
           ) : (
-            <AlternativeDrawer events={events} onEventClick={setSelectedEvent} isSlider={isSlider} setIsSlider={setIsSlider}/>
+            <AlternativeDrawer events={randomEvents} onEventClick={setSelectedEvent} isSlider={isSlider} setIsSlider={setIsSlider} />
           )}
-
-          {/* Main Content Container */}
-          <div className="cont-2 flex-1 flex flex-col relative">
-            {/* Mobile Random Events Button */}
-            {window.innerWidth < 1024 && (
-              <div className="absolute z-[999] bottom-28 left-1/2 -translate-x-1/2">
-                <button onClick={() => setIsSlider(!isSlider)}
-                  className="bg-white px-6 py-2 rounded-full shadow-lg"
-                >
-                  Random Events
-                </button>
-              </div>
-            )}
-            
-            {/* Content Section */}
-            <div className="flex-1 flex flex-col items-center relative">
-              {/* Controls Container */}
-              <div className="absolute top-4 left-1/2 -translate-x-1/2 z-[99] 
-                            bg-gray-100/80 px-4 sm:px-8 py-2 rounded-full 
-                            w-fit max-w-[90vw] sm:max-w-fit">
-                {window.innerWidth >= 1024 ? (
-                  <LeftSliders yearRange={yearRange}
-                    setSelectedEvent={setSelectedEvent}
-                    setYearRange={setYearRange}
-                    setSelectedCategory={setSelectedCategory}
-                  />
-                ) : (
-                  <div className="text-center text-sm sm:text-base font-medium">
-                    Exploring Historical Events
-                  </div>
-                )}
-              </div>
-
-              {/* Map Container - Full screen for mobile, full container for desktop */}
-              <div className={`${window.innerWidth >= 1024 
-                  ? "w-full h-full" 
-                  : "fixed inset-0 w-screen h-screen"
-              }`}>
-                <MapComponent events={events} 
-                  selectedEvent={selectedEvent} 
-                />
-              </div>  
+          {!isDesktop && (
+            <div className="absolute z-[9999] bottom-28 left-1/2 -translate-x-1/2">
+              <button onClick={() => setIsSlider(!isSlider)} className="bg-white px-6 py-2 rounded-full shadow-lg">
+                {!isSlider ? "Random Events" : "Close"}
+              </button>
             </div>
+          )}
+          <div className="relative  h-full w-full">
+            <MapComponent events={events} selectedEvent={selectedEvent} />
           </div>
         </div>
       </div>
     </ThemeProvider>
   );
-
 }
+
+  
+// return (
+//     <ThemeProvider theme={theme}>
+
+        
+//         {/* Conditional rendering of Drawer vs AlternativeDrawer based on screen size */}
+//       <div className="main-cont h-screen w-screen overflow-hidden ">
+//                 <div className={`canvas flex flex-col relative  transition-all h-full ${
+//                   isOpen && window.innerWidth >= 1024 ? "max-w-[72%]" : "w-full"
+//                 }`} 
+//                 > 
+//                 {window.innerWidth >= 1024 && (
+//                   <Navbar setSelectedEvent={setSelectedEvent} isOpen={isOpen} setIsOpen={setIsOpen}/>
+//                 )}
+//  <div className="sliders-cont absolute  flex flex-col items-center left-[50%] -translate-x-1/2 top-20  z-[999]">
+//                 {/* Controls Container */}
+//                   {window.innerWidth >= 1024 ? (
+//                     <div className="bg-gray-100/80 px-1 minhf rounded-full w-fit max-w-fit">
+//                     <LeftSliders yearRange={yearRange}
+//                       setSelectedEvent={setSelectedEvent}
+//                       setYearRange={setYearRange}
+//                       setSelectedCategory={setSelectedCategory}
+//                     />
+//                  {/* <RightSliders setLimit={setLimit} colors={colors} pages={pages} currentPage={currentPage} setCurrentPage={setCurrentPage} limit={limit} filterTotalEvents={filterTotalEvents} totalEvents={totalEvents} />  */}
+//                 </div>
+             
+//                   ) : (<>Hello</>)}
+//               </div> 
+//                 {window.innerWidth >= 1024 ? (
+//                   <Drawer setIsOpen={setIsOpen} isOpen={isOpen} events={randomEvents} randomizeEvents={randomizeEvents} onEventClick={setSelectedEvent} />
+//                 ) : (
+//                   <AlternativeDrawer events={randomEvents} onEventClick={setSelectedEvent} isSlider={isSlider} setIsSlider={setIsSlider}/>
+//                 )}
+//                 {/* Mobile Random Events Button */}
+//                 {window.innerWidth < 1024 && (
+//                   <div className="absolute z-[9999] bottom-28 left-1/2 -translate-x-1/2">
+//                     <button onClick={() => setIsSlider(!isSlider)}
+//                       className="bg-white px-6 py-2 rounded-full shadow-lg"
+//                     >{!isSlider?"Random Events":"Close"}
+//                     </button>
+//                   </div>
+//                 )}
+               
+//           {/* Main Content Container */}
+//               {/* Content Section */}
+//                 {/* Map Container - Full screen for mobile, full container for desktop */}
+//                 {/* <div className={`inset-0 ${ window.innerWidth >= 1024?"top-16":""} w-full `}> */}
+//                 <div className={`relative inset-0 h-full w-full `}>
+//                   <MapComponent events={events} selectedEvent={selectedEvent}/>
+//                 </div> 
+//         </div>
+//       </div>
+//     </ThemeProvider>
+//   );
+
+// }
 
 export default App;

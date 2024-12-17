@@ -41,7 +41,7 @@ const RangeSlider = ({ setSelectedEvent, yearRange, setYearRange }) => {
   };
 
   return (
-    <Box sx={{ minWidth:"900px"  }}>
+    <Box sx={{ minWidth:"750px"  }}>
       <Typography id="input-slider" textAlign={'center'} gutterBottom>
         Year Range:
       </Typography>

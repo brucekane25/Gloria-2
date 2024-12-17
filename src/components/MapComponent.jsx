@@ -63,7 +63,7 @@ const MapComponent = ({ events, selectedEvent }) => {
         [90, 280],
       ]}
       maxBoundsViscosity={1}
-      style={{ margin: 0, padding:0, minHeight: "100vh", width: "100%" }}
+      style={{ margin: 0, padding:0, minHeight: "100%", width: "100%" }}
     >
       <LayersControl position="topright">
         <LayersControl.Overlay  name="OpenStreetMap">

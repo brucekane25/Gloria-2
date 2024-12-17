@@ -43,7 +43,7 @@ const AlternativeDrawer = ({ isSlider, setIsSlider, events, onEventClick }) => {
                 <div className="flex items-center justify-between">
                   {/* Thumbnail */}
                   <div
-                    className={`h-16 min-w-16 rounded-md ${
+                    className={`h-14 min-w-14 rounded-md ${
                       event.thumbnail ? "overflow-hidden" : "bg-gray-300"
                     }`}
                   >
