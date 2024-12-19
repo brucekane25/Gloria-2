@@ -125,7 +125,7 @@ function App() {
     <ThemeProvider theme={theme}>
       <div className="main-cont h-screen w-screen overflow-hidden">
         <div className={`canvas flex flex-col relative transition-all h-full ${isDesktop && isOpen ? "max-w-[70%]" : "w-full"}`}>
-          {isDesktop?( <Navbar setSelectedEvent={setSelectedEvent} isOpen={isOpen} setIsOpen={setIsOpen} />):(<BottomAppBar/>)}
+          {isDesktop?( <Navbar setSelectedEvent={setSelectedEvent} isOpen={isOpen} setIsOpen={setIsOpen} />):(<BottomAppBar isSlider={isSlider} setIsSlider={setIsSlider} />)}
           <div className="sliders-cont absolute flex flex-col items-center left-1/2 -translate-x-1/2 top-20 z-[999]">
             {isDesktop ? (
               <div className="bg-gray-100/80 px-4 min-h-full rounded-full w-fit max-w-fit">
@@ -149,13 +149,13 @@ function App() {
           )}
           {!isDesktop && (
             <div className="absolute z-[9999] bottom-28 left-1/2 -translate-x-1/2">
-              <button onClick={() => setIsSlider(!isSlider)} className="bg-white px-6 py-2 rounded-full shadow-lg">
-                {!isSlider ? "Random Events" : "Close"}
-              </button>
+              
+              {isSlider && <button onClick={() => setIsSlider(!isSlider)} className ="bg-white px-6 py-2 rounded-full shadow-lg">Close</button>}
+              
             </div>
           )}
           <div className="relative  h-full w-full">
-<Backdrop open={open} setOpen={setOpen}/>
+            <Backdrop open={open} setOpen={setOpen}/>
             <MapComponent events={events} selectedEvent={selectedEvent} />
           </div>
         </div>

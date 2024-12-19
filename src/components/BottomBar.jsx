@@ -6,7 +6,7 @@ import Toolbar from '@mui/material/Toolbar';
 import IconButton from '@mui/material/IconButton';
 import Fab from '@mui/material/Fab';
 import MenuIcon from '@mui/icons-material/Menu';
-import AddIcon from '@mui/icons-material/Add';
+import UpIcon from '@mui/icons-material/ArrowUpwardTwoTone';
 import SearchIcon from '@mui/icons-material/Search';
 import MoreIcon from '@mui/icons-material/MoreVert';
 
@@ -20,7 +20,7 @@ const StyledFab = styled(Fab)({
   margin: '0 auto',
 });
 
-export default function BottomAppBar() {
+export default function BottomAppBar({setIsSlider, isSlider}) {
   return (
     <>
       {/* <CssBaseline /> */}
@@ -35,15 +35,15 @@ export default function BottomAppBar() {
           <IconButton color="inherit" aria-label="open drawer">
             <MenuIcon />
           </IconButton>
-          <StyledFab color="secondary" aria-label="add">
-            <AddIcon />
+          <StyledFab onClick={() =>setIsSlider(!isSlider)}color="secondary" aria-label="add">
+            <UpIcon />
           </StyledFab>
           <Box sx={{ flexGrow: 1 }} />
           <IconButton color="inherit">
             <SearchIcon />
           </IconButton>
           <IconButton color="inherit">
-            <MoreIcon />
+            <MoreIcon  />
           </IconButton>
         </Toolbar>
       </AppBar>

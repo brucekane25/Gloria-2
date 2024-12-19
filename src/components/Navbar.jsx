@@ -13,7 +13,7 @@ import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
 import Tooltip from '@mui/material/Tooltip';
 import MenuItem from '@mui/material/MenuItem';
-import AdbIcon from '@mui/icons-material/Adb';
+import AdbIcon from '@mui/icons-material/Map';
 
 const pages = ['Globe', 'Portfolio', 'Blog'];
 const settings = ['Github Profile', 'Account', 'Dashboard'];
@@ -40,7 +40,7 @@ function Navbar({isOpen, setSelectedEvent, setIsOpen}) {
   return (
     <AppBar position="sticky" sx={{ height: 'fit-content' }}>  {/* Added height: 'auto' here */}
       <Container maxWidth="xl">
-        <Toolbar disableGutters>
+        <Toolbar disableGutters >
           <AdbIcon sx={{ display: { xs: 'none', md: 'flex' }, mr: 1 }} />
           <Typography
             variant="h6"
