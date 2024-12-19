@@ -38,7 +38,11 @@ const AlternativeDrawer = ({ isSlider, setIsSlider, events, onEventClick }) => {
               <li
                 key={event._id}
                 className="p-3 bg-white rounded shadow hover:shadow-lg transition-shadow cursor-pointer"
-                onClick={() => onEventClick(event)}
+                onClick={() => {
+                  onEventClick(event);
+                  setIsSlider(!isSlider)
+                }
+              }
               >
                 <div className="flex items-center justify-between">
                   {/* Thumbnail */}

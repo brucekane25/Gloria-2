@@ -11,12 +11,16 @@ import Button from "@mui/material/Button";
 import Drawer from "./components/Pane";
 import categorizeEvents from "./components/CategoriseEvents";
 import { red } from "@mui/material/colors";
+import Fab from '@mui/material/Fab';
+import { styled } from '@mui/material/styles';
 import LeftSliders from "./components/LeftSliders";
 import RightSliders from "./components/RightSliders";
 import AlternativeDrawer from "./components/AlternativeDrawer";
-import { useMediaQuery } from "@mui/material";
+import { IconButton, useMediaQuery } from "@mui/material";
 import BottomAppBar from "./components/BottomBar";
 import ChipsArray from "./components/CategoryChip";
+import DownArrow from "@mui/icons-material/ArrowDownwardTwoTone";
+
 function App() {
   const [events, setEvents] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
@@ -58,7 +62,9 @@ function App() {
       },
     },
   });
-
+  const StyledFab = styled(Fab)({
+    margin: '0 auto',
+  });
   const getRandomEvents = (count) => {
     const filteredEvents = events.filter((event) => event.thumbnail !== null);
     const shuffled = filteredEvents.sort(() => Math.random() - 0.5);
@@ -150,7 +156,15 @@ function App() {
           {!isDesktop && (
             <div className="absolute z-[9999] bottom-28 left-1/2 -translate-x-1/2">
               
-              {isSlider && <button onClick={() => setIsSlider(!isSlider)} className ="bg-white px-6 py-2 rounded-full shadow-lg">Close</button>}
+              {isSlider && <button onClick={() => setIsSlider(!isSlider)} 
+              // className ="bg-white px-6 py-2 rounded-full shadow-lg"
+                >
+                  <StyledFab color="secondary" >
+                <DownArrow />
+
+                  </StyledFab>
+
+                </button>}
               
             </div>
           )}

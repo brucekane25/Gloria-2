@@ -35,7 +35,7 @@ export default function BottomAppBar({setIsSlider, isSlider}) {
           <IconButton color="inherit" aria-label="open drawer">
             <MenuIcon />
           </IconButton>
-          <StyledFab onClick={() =>setIsSlider(!isSlider)}color="secondary" aria-label="add">
+          <StyledFab onClick={() =>setIsSlider(!isSlider)} color="secondary" aria-label="add">
             <UpIcon />
           </StyledFab>
           <Box sx={{ flexGrow: 1 }} />
