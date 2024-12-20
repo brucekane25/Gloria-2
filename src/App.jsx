@@ -131,7 +131,7 @@ function App() {
   return (
     <ThemeProvider theme={theme}>
           {!isDesktop && (
-            <div className="fixed z-[999] bottom-[32%] top-auto translate-y-1/2 right-2"  >
+            <div className="fixed z-[999] bottom-[35vh] top-auto translate-y-1/2 right-2"  >
 
               <VerticalSlider className="" setSelectedEvent={setSelectedEvent} yearRange={yearRange} setYearRange={setYearRange}/>
             </div>
