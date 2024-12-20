@@ -20,6 +20,7 @@ import { IconButton, useMediaQuery } from "@mui/material";
 import BottomAppBar from "./components/BottomBar";
 import ChipsArray from "./components/CategoryChip";
 import DownArrow from "@mui/icons-material/ArrowDownwardTwoTone";
+import VerticalSlider from "./components/VerticalSlider";
 
 function App() {
   const [events, setEvents] = useState([]);
@@ -132,6 +133,14 @@ function App() {
       <div className="main-cont h-screen w-screen overflow-hidden">
         <div className={`canvas flex flex-col relative transition-all h-full ${isDesktop && isOpen ? "max-w-[70%]" : "w-full"}`}>
           {isDesktop?( <Navbar setSelectedEvent={setSelectedEvent} isOpen={isOpen} setIsOpen={setIsOpen} />):(<BottomAppBar isSlider={isSlider} setIsSlider={setIsSlider} />)}
+          {!isDesktop && (
+            <div className="absolute z-[999] bottom-[7%]  right-2"  >
+
+              <VerticalSlider className="" setSelectedEvent={setSelectedEvent} yearRange={yearRange} setYearRange={setYearRange}/>
+            </div>
+          )}
+          
+          
           <div className="sliders-cont absolute flex flex-col items-center left-1/2 -translate-x-1/2 top-20 z-[999]">
             {isDesktop ? (
               <div className="bg-gray-100/80 px-4 min-h-full rounded-full w-fit max-w-fit">
@@ -141,10 +150,12 @@ function App() {
                   setYearRange={setYearRange}
                   setSelectedCategory={setSelectedCategory}
                   />
+
           {/* <ChipsArray/> */}
               </div>
             ) : (
               <>
+              {/* Hello */}
               </>
             )}
           </div>

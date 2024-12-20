@@ -37,4 +37,4 @@ const LeftSliders = ({setSelectedEvent,yearRange,setYearRange,setSelectedCategor
   )
 }
 
-export default LeftSliders
+export default LeftSliders;
