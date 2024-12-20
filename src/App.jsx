@@ -26,7 +26,7 @@ function App() {
   const [currentPage, setCurrentPage] = useState(1);
   const [pages, setPages] = useState(1);
   const [filterpages, setFilterPages] = useState(0);
-  const [limit, setLimit] = useState(1300);
+  const [limit, setLimit] = useState(2000);
   const [selectedCategory, setSelectedCategory] = useState("");
   const [randomEvents, setRandomEvents] = useState([]);
   const [totalEvents, setTotalEvents] = useState(null); 
@@ -72,7 +72,7 @@ function App() {
   };
 
   const randomizeEvents = () => {
-    setRandomEvents(getRandomEvents(10));
+    setRandomEvents(getRandomEvents(16));
     setSelectedEvent(null);
   };
 
@@ -151,22 +151,24 @@ function App() {
           {isDesktop ? (
             <Drawer setIsOpen={setIsOpen} isOpen={isOpen} events={randomEvents} randomizeEvents={randomizeEvents} onEventClick={setSelectedEvent} />
           ) : (
-            <AlternativeDrawer events={randomEvents} onEventClick={setSelectedEvent} isSlider={isSlider} setIsSlider={setIsSlider} />
+            <AlternativeDrawer events={randomEvents} onEventClick={setSelectedEvent} isSlider={isSlider} randomizeEvents={randomizeEvents} setIsSlider={setIsSlider} />
           )}
-          {!isDesktop && (
-            <div className="absolute z-[9999] bottom-28 left-1/2 -translate-x-1/2">
+          {!isDesktop && isSlider && (
+            
+            <div className="absolute z-[9999] bottom-8 left-1/2 -translate-x-1/2">
               
-              {isSlider && <button onClick={() => setIsSlider(!isSlider)} 
-              // className ="bg-white px-6 py-2 rounded-full shadow-lg"
+               <button onClick={() => setIsSlider(!isSlider)} 
                 >
                   <StyledFab color="secondary" >
                 <DownArrow />
-
                   </StyledFab>
+                </button>
+                </div>
+                
 
-                </button>}
+
               
-            </div>
+            
           )}
           <div className="relative  h-full w-full">
             <Backdrop open={open} setOpen={setOpen}/>

@@ -2,7 +2,7 @@ import { SwipeableDrawer, IconButton } from "@mui/material";
 import MenuIcon from "@mui/icons-material/Menu";
 import { useState } from "react";
 
-const AlternativeDrawer = ({ isSlider, setIsSlider, events, onEventClick }) => {
+const AlternativeDrawer = ({ isSlider, setIsSlider, events, randomizeEvents, onEventClick }) => {
   return (
     <>
       <SwipeableDrawer
@@ -14,25 +14,31 @@ const AlternativeDrawer = ({ isSlider, setIsSlider, events, onEventClick }) => {
         swipeAreaWidth={20} // Adjust the swipe area width
         sx={{
           "& .MuiDrawer-paper": {
-            backgroundColor: "rgba(0,0,0,0.5)",
+            backgroundColor: "rgba(1,1,1,0.5 )",
             boxShadow: "0 0 10px rgba(0, 0, 0, 0.1)",
-          },
+          }, 
           
         }}
       >
         {/* Drawer Header */}
-        <div className="flex items-center mt-3 px-4 justify-between">
-          <h2 className="text-lg font-semibold">Events</h2>
-          <IconButton
+        <div  className="flex items-center pb-3 mt-2 px-4 justify-between">
+          <h2 aria-label="close drawer" onClick={() => {setIsSlider(false)}} className="text-2xl text-white font-bold">Random Events</h2>
+          <button
+            onClick={randomizeEvents}
+            className="px-4 mt-1 py-2 bg-blue-500 text-white rounded "
+          >
+            Randomize
+          </button>
+          {/* <IconButton
             onClick={() => setIsSlider(false)}
             aria-label="close drawer"
           >
             <MenuIcon />
-          </IconButton>
+          </IconButton> */}
         </div>
 
         {/* Drawer Content */}
-        <div className="p-1 overflow-y-auto min-w-[420px]">
+        <div className="p-1 overflow-auto max-h-[60vh] min-w-[320px]">
           <ul className="space-y-2">
             {events.map((event) => (
               <li

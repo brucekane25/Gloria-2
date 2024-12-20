@@ -14,7 +14,7 @@ import MoreIcon from '@mui/icons-material/MoreVert';
 const StyledFab = styled(Fab)({
   position: 'absolute',
   zIndex: 1,
-  top: -30,
+  top: -20,
   left: 0,
   right: 0,
   margin: '0 auto',
@@ -30,7 +30,7 @@ export default function BottomAppBar({setIsSlider, isSlider}) {
         </Typography>
         
         </Paper> */}
-      <AppBar position="fixed" color="primary" sx={{ top: 'auto', bottom: 0 }}>
+      <AppBar position="fixed" color="info"  sx={{ top: 'auto',maxHeight:"fit", bottom: 0 }}>
         <Toolbar>
           <IconButton color="inherit" aria-label="open drawer">
             <MenuIcon />
