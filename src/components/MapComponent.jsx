@@ -120,7 +120,7 @@ const MapComponent = ({ events, selectedEvent }) => {
       ></GeoJSON>
       <MarkerClusterGroup
         ref={clusterGroupRef}
-        disableClusteringAtZoom={12}
+        disableClusteringAtZoom={9}
         maxClusterRadius={60}
       >
         {events.map((event) => (
