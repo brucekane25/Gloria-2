@@ -130,7 +130,6 @@ function App() {
   };
   return (
     <ThemeProvider theme={theme}>
-      <div className="main-cont h-screen w-screen overflow-hidden">
           {!isDesktop && (
             <div className="fixed z-[999] bottom-[32%] translate-y-1/2 right-2"  >
 
@@ -151,6 +150,7 @@ function App() {
                 </div>
                             
           )}
+      <div className="main-cont h-screen w-screen overflow-hidden">
         <div className={`canvas flex flex-col relative transition-all h-full ${isDesktop && isOpen ? "max-w-[70%]" : "w-full"}`}>
           {isDesktop?( <Navbar setSelectedEvent={setSelectedEvent} isOpen={isOpen} setIsOpen={setIsOpen} />):(<BottomAppBar isSlider={isSlider} setIsSlider={setIsSlider} />)}
           
