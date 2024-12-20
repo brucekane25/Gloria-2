@@ -73,7 +73,7 @@ const MapComponent = ({ events, selectedEvent }) => {
           />
         </LayersControl.Overlay>
 
-        <LayersControl.Overlay checked name="MapTiler">
+        <LayersControl.Overlay  name="MapTiler">
           <TileLayer
             attribution='<a href="https://www.maptiler.com/copyright">MapTiler</a>'
             // url={`https://api.maptiler.com/tiles/satellite-v2/{z}/{x}/{y}.jpg?key=2b4nj2gRRkpUERQZxBXB`}
@@ -95,7 +95,7 @@ const MapComponent = ({ events, selectedEvent }) => {
           />
         </LayersControl.Overlay>
 
-        <LayersControl.Overlay name="Detailed">
+        <LayersControl.Overlay checked name="Detailed">
           <TileLayer
             attribution='<a href="https://www.maptiler.com/copyright">ThunderForestMaps</a>'
             url="https://server.arcgisonline.com/ArcGIS/rest/services/World_Street_Map/MapServer/tile/{z}/{y}/{x}" // colorful map nice details

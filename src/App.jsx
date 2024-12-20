@@ -134,7 +134,7 @@ function App() {
         <div className={`canvas flex flex-col relative transition-all h-full ${isDesktop && isOpen ? "max-w-[70%]" : "w-full"}`}>
           {isDesktop?( <Navbar setSelectedEvent={setSelectedEvent} isOpen={isOpen} setIsOpen={setIsOpen} />):(<BottomAppBar isSlider={isSlider} setIsSlider={setIsSlider} />)}
           {!isDesktop && (
-            <div className="absolute z-[999] bottom-[13%]  right-2"  >
+            <div className="absolute z-[999] top-[68%] -translate-y-1/2 right-2"  >
 
               <VerticalSlider className="" setSelectedEvent={setSelectedEvent} yearRange={yearRange} setYearRange={setYearRange}/>
             </div>
@@ -166,7 +166,7 @@ function App() {
           )}
           {!isDesktop && isSlider && (
             
-            <div className="absolute z-[9999] bottom-[12vh] left-1/2 -translate-x-1/2">
+            <div className="absolute z-[9999] top-[90vh] left-1/2 -translate-x-1/2">
               
                <button onClick={() => setIsSlider(!isSlider)} 
                 >
