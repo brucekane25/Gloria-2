@@ -48,7 +48,7 @@ const VerticalSlider = ({ setSelectedEvent, yearRange, setYearRange }) => {
         boxShadow: '0px 4px 6px rgba(0, 0, 0, 0.1)',
         // maxWidth: '400px',
         // margin: 'auto',
-        marginBottom:"3px"
+        // marginBottom:"3px" 
       }}
     >
       <Stack direction="row" spacing={2} alignItems="center" justifyContent="center">
