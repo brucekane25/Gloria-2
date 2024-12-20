@@ -131,14 +131,28 @@ function App() {
   return (
     <ThemeProvider theme={theme}>
       <div className="main-cont h-screen w-screen overflow-hidden">
-        <div className={`canvas flex flex-col relative transition-all h-full ${isDesktop && isOpen ? "max-w-[70%]" : "w-full"}`}>
-          {isDesktop?( <Navbar setSelectedEvent={setSelectedEvent} isOpen={isOpen} setIsOpen={setIsOpen} />):(<BottomAppBar isSlider={isSlider} setIsSlider={setIsSlider} />)}
           {!isDesktop && (
             <div className="absolute z-[999] top-[68%] -translate-y-1/2 right-2"  >
 
               <VerticalSlider className="" setSelectedEvent={setSelectedEvent} yearRange={yearRange} setYearRange={setYearRange}/>
             </div>
           )}
+
+{!isDesktop && isSlider && (
+            
+            <div className="absolute z-[9999] top-[90vh] left-1/2 -translate-x-1/2">
+              
+               <button onClick={() => setIsSlider(!isSlider)} 
+                >
+                  <StyledFab color="secondary" >
+                <DownArrow />
+                  </StyledFab>
+                </button>
+                </div>
+                            
+          )}
+        <div className={`canvas flex flex-col relative transition-all h-full ${isDesktop && isOpen ? "max-w-[70%]" : "w-full"}`}>
+          {isDesktop?( <Navbar setSelectedEvent={setSelectedEvent} isOpen={isOpen} setIsOpen={setIsOpen} />):(<BottomAppBar isSlider={isSlider} setIsSlider={setIsSlider} />)}
           
           
           <div className="sliders-cont absolute flex flex-col items-center left-1/2 -translate-x-1/2 top-20 z-[999]">
@@ -163,23 +177,6 @@ function App() {
             <Drawer setIsOpen={setIsOpen} isOpen={isOpen} events={randomEvents} randomizeEvents={randomizeEvents} onEventClick={setSelectedEvent} />
           ) : (
             <AlternativeDrawer events={randomEvents} onEventClick={setSelectedEvent} isSlider={isSlider} randomizeEvents={randomizeEvents} setIsSlider={setIsSlider} />
-          )}
-          {!isDesktop && isSlider && (
-            
-            <div className="absolute z-[9999] top-[90vh] left-1/2 -translate-x-1/2">
-              
-               <button onClick={() => setIsSlider(!isSlider)} 
-                >
-                  <StyledFab color="secondary" >
-                <DownArrow />
-                  </StyledFab>
-                </button>
-                </div>
-                
-
-
-              
-            
           )}
           <div className="relative  h-full w-full">
             <Backdrop open={open} setOpen={setOpen}/>
