@@ -27,7 +27,7 @@ function App() {
   const [currentPage, setCurrentPage] = useState(1);
   const [pages, setPages] = useState(1);
   const [filterpages, setFilterPages] = useState(0);
-  const [limit, setLimit] = useState(3000);
+  const [limit, setLimit] = useState(5000);
   const [selectedCategory, setSelectedCategory] = useState("");
   const [randomEvents, setRandomEvents] = useState([]);
   const [totalEvents, setTotalEvents] = useState(null); 
@@ -157,13 +157,14 @@ function App() {
           
           <div className="sliders-cont absolute flex flex-col items-center left-1/2 -translate-x-1/2 top-20 z-[999]">
             {isDesktop ? (
-              <div className="bg-gray-100/80 px-4 min-h-full rounded-full w-fit max-w-fit">
+              <div className="bg-gray-100/95 px-4 min-h-full rounded-full w-fit max-w-fit">
                 <LeftSliders
                   yearRange={yearRange}
                   setSelectedEvent={setSelectedEvent}
                   setYearRange={setYearRange}
                   setSelectedCategory={setSelectedCategory}
                   />
+                   {/* <RightSliders setLimit={setLimit} colors={colors} pages={pages} currentPage={currentPage} setCurrentPage={setCurrentPage} limit={limit} filterTotalEvents={filterTotalEvents} totalEvents={totalEvents} />  */}
 
           {/* <ChipsArray/> */}
               </div>
@@ -211,7 +212,7 @@ function App() {
 //                       setYearRange={setYearRange}
 //                       setSelectedCategory={setSelectedCategory}
 //                     />
-//                  {/* <RightSliders setLimit={setLimit} colors={colors} pages={pages} currentPage={currentPage} setCurrentPage={setCurrentPage} limit={limit} filterTotalEvents={filterTotalEvents} totalEvents={totalEvents} />  */}
+                //  {/* <RightSliders setLimit={setLimit} colors={colors} pages={pages} currentPage={currentPage} setCurrentPage={setCurrentPage} limit={limit} filterTotalEvents={filterTotalEvents} totalEvents={totalEvents} />  */}
 //                 </div>
              
 //                   ) : (<>Hello</>)}
