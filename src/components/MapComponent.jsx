@@ -140,7 +140,7 @@ const MapComponent = ({ events, selectedEvent }) => {
                   {/* Thumbnail */}
                   {event.thumbnail && (
                     <img
-                      className="h-40 w-40 object-cover rounded-md flex-shrink-0"
+                      className="h-40 w-40 object-cover rounded-md flex-shrink"
                       src={event.thumbnail}
                       alt={event.title || "Event Thumbnail"}
                     />
@@ -149,9 +149,9 @@ const MapComponent = ({ events, selectedEvent }) => {
                   {/* Text Content */}
                   <div className="flex flex-col justify-between gap-3 flex-grow">
                     <div>
-                      <h2 className="text-base font-medium text-gray-800 line-clamp-4">
+                      <h3 className="text-base line-clamp-6 font-normal  text-gray-900 ">
                         {event.title}
-                      </h2>
+                      </h3>
                       <a
                         href={`https://en.wikipedia.org/?curid=${event.pageID}`}
                         target="_blank"

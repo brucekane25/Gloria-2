@@ -91,11 +91,11 @@ function Navbar({isOpen, setSelectedEvent, setIsOpen}) {
               onClose={handleCloseNavMenu}
               sx={{ display: { xs: 'block', md: 'none' } }}
             >
-              {pages.map((page) => (
+              {/* {pages.map((page) => (
                 <MenuItem key={page} onClick={handleCloseNavMenu}>
                   <Typography sx={{ textAlign: 'center' }}>{page}</Typography>
                 </MenuItem>
-              ))}
+              ))} */}
             </Menu>
           </Box>
           <AdbIcon sx={{ display: { xs: 'flex', md: 'none' }, mr: 1 }} />
@@ -117,8 +117,8 @@ function Navbar({isOpen, setSelectedEvent, setIsOpen}) {
           >
             LOGO
           </Typography>
-          <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
-            {pages.map((page) => (
+          <Box sx={{ flexGrow: 1 }}>
+            {/* {pages.map((page) => (
               <Button
                 key={page}
                 onClick={handleCloseNavMenu}
@@ -126,7 +126,7 @@ function Navbar({isOpen, setSelectedEvent, setIsOpen}) {
               >
                 {page}
               </Button>
-            ))}
+            ))} */}
           </Box>
           <Box sx={{ flexGrow: 0 }}>
             <Tooltip title="Open settings">
