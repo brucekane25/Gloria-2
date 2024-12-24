@@ -23,13 +23,7 @@ const StyledFab = styled(Fab)({
 export default function BottomAppBar({setIsSlider, isSlider}) {
   return (
     <>
-      {/* <CssBaseline /> */}
-      {/* <Paper square sx={{ pb: '50px' }}>
-        <Typography variant="h5" gutterBottom component="div" sx={{ p: 2, pb: 0 }}>
-        Inbox
-        </Typography>
-        
-        </Paper> */}
+     
       <AppBar position="fixed" color="info"  sx={{ top: 'auto',maxHeight:"fit", bottom: 0 }}>
         <Toolbar>
           <IconButton color="inherit" aria-label="open drawer">

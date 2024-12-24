@@ -155,7 +155,7 @@ function App() {
           {isDesktop?( <Navbar setSelectedEvent={setSelectedEvent} isOpen={isOpen} setIsOpen={setIsOpen} />):(<BottomAppBar isSlider={isSlider} setIsSlider={setIsSlider} />)}
           
           
-          <div className="sliders-cont absolute flex flex-col items-center left-1/2 -translate-x-1/2 top-20 z-[999]">
+          <div className="sliders-cont absolute flex flex-col items-center left-1/2 -translate-x-1/2 top-[88px] z-[999]">
             {isDesktop ? (
               <div className="bg-gray-100/95 px-4 min-h-full rounded-full w-fit max-w-fit">
                 <LeftSliders
