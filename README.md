@@ -49,7 +49,7 @@ A sophisticated React-based web application that visualizes over 6,500 historica
 
 1. **Clone the repository**
 ```bash
-git clone [repository-url]
+git clone https://github.com/brucekane25/Gloria-2/
 ```
 2. **Install the node modules**
 ```bash
