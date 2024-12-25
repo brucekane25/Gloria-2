@@ -1,8 +1,55 @@
-# React + Vite
+# Historia Frontend - Interactive Historical Events on Map  
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A sophisticated React-based web application that visualizes over 6,500 historical events on an interactive world map, offering an engaging way to explore history through space and time.
 
-Currently, two official plugins are available:
+## Features
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+- **Interactive Map Visualization**
+  - Dynamic event clustering with MarkerClusterGroup
+  - Custom map markers and detailed event popups
+  - Multiple map layer options (OpenStreetMap, MapTiler, Dark Mode)
+  - GeoJSON integration for geographical boundaries(India) 
+
+- **Advanced Filtering System**
+  - Dual-mode year range selection (horizontal for desktop, vertical for mobile)
+  - Category-based filtering with 15+ historical event types
+  - Real-time event clustering and map updates
+
+- **Responsive Design**
+  - Desktop: Persistent sidebar with event details
+  - Mobile: Swipeable bottom drawer
+  - Adaptive layout components
+
+- **Timeline View**
+  - Chronological display of events
+  - Event thumbnails and descriptions
+  - Interactive event selection
+
+## Technical Stack
+
+- **Core Technologies**
+  - React 18
+  - Vite
+  - JavaScript ES6+
+
+- **UI Frameworks & Libraries**
+  - Material-UI v6
+  - Tailwind CSS
+  - React-Leaflet
+  - Leaflet MarkerCluster
+
+- **State Management**
+  - React Hooks
+  - Context API
+
+- **HTTP Client**
+  - Axios
+
+## Getting Started
+
+1. **Clone the repository**
+```bash
+git clone [repository-url]
+cd Frontend
+npm i
+npm run dev
