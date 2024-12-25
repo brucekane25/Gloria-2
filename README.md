@@ -50,6 +50,13 @@ A sophisticated React-based web application that visualizes over 6,500 historica
 1. **Clone the repository**
 ```bash
 git clone [repository-url]
+```
+2. **Install the node modules**
+```bash
 cd Frontend
 npm i
+```
+3. **Run the development server**
+```bash
 npm run dev
+```
