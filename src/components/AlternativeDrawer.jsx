@@ -11,7 +11,7 @@ const AlternativeDrawer = ({ isSlider, setIsSlider, events, randomizeEvents, onE
         onClose={() => setIsSlider(false)}
         onOpen={() => setIsSlider(true)}
         
-        swipeAreaWidth={20} 
+        swipeAreaWidth={15} 
         sx={{
           "& .MuiDrawer-paper": {
             backgroundColor: "rgba(1,1,1,0.5 )",

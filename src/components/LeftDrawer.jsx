@@ -16,7 +16,8 @@ const LeftDrawer = ({ isLeftOpen, setisLeftOpen, events ,onEventClick}) => {
         onClose={toggleDrawer(false)}
         PaperProps={{
           sx: {
-            maxWidth: '325px', 
+            minWidth: '315px', 
+            maxWidth: '35vw', 
             backgroundColor: "#f7f7f7",
             boxShadow: "0 0 30px rgba(0, 0, 0, 0.1)",
             position: 'absolute', 
@@ -38,7 +39,7 @@ const LeftDrawer = ({ isLeftOpen, setisLeftOpen, events ,onEventClick}) => {
           <h2 className="text-lg font-semibold">Timeline</h2>
         </div>
 
-        <div className=" h-4 px-4 ">
+        <div className=" h-4 px-1 ">
           <EventTimeline events={events} onEventClick={onEventClick}/>
         </div>
       </Drawer>
