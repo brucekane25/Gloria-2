@@ -2,32 +2,27 @@ import { useState, useEffect } from "react";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import MapComponent from "./components/MapComponent";
 import apiClient from "./api/axios";
-import CategoryDropdown from "./components/CategoryDropdown";
 import Navbar from "./components/Navbar";
-import RangeSlider from "./components/RangeSlider";
 import Backdrop from "./components/Backdrop";
-import Box from "@mui/material/Box";
-import Button from "@mui/material/Button";
 import Drawer from "./components/Pane";
 import categorizeEvents from "./components/CategoriseEvents";
-import { red } from "@mui/material/colors";
 import Fab from '@mui/material/Fab';
 import { styled } from '@mui/material/styles';
 import LeftSliders from "./components/LeftSliders";
 import RightSliders from "./components/RightSliders";
 import AlternativeDrawer from "./components/AlternativeDrawer";
-import { IconButton, useMediaQuery } from "@mui/material";
+import { useMediaQuery } from "@mui/material";
 import BottomAppBar from "./components/BottomBar";
-import ChipsArray from "./components/CategoryChip";
 import DownArrow from "@mui/icons-material/ArrowDownwardTwoTone";
 import VerticalSlider from "./components/VerticalSlider";
-
+import { themes } from "./themes/colorThemes";
+import LeftDrawer from "./components/LeftDrawer";
 function App() {
   const [events, setEvents] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
   const [pages, setPages] = useState(1);
   const [filterpages, setFilterPages] = useState(0);
-  const [limit, setLimit] = useState(4500);
+  const [limit, setLimit] = useState(1000);
   const [selectedCategory, setSelectedCategory] = useState("");
   const [randomEvents, setRandomEvents] = useState([]);
   const [totalEvents, setTotalEvents] = useState(null); 
@@ -39,30 +34,28 @@ function App() {
   });
   const [selectedEvent, setSelectedEvent] = useState(null);
  const [isOpen, setIsOpen] = useState(false)
+  const [isLeftOpen, setisLeftOpen] = useState(false)
  const [isSlider, setIsSlider] = useState(false)
- const colors = {
-    primary: "#aad8aa", // Soft pastel green
-    secondary: "#326232", // Soft pink
-    background: "#FFE0B2", // Pale peach
-    accent: "#B4C7E7", // Light pastel blue
-  };
+
 
   const theme = createTheme({
     palette: {
       primary: {
-        main: colors.primary,
+        main: themes.light.primary,
       },
       secondary: {
-        main: colors.secondary,
+        main: themes.light.secondary,
       },
       background: {
-        default: colors.background,
+        default: themes.light.background,
       },
       accent: {
-        main: colors.accent,
+        main: themes.light.accent,
       },
     },
   });
+  
+
   const StyledFab = styled(Fab)({
     margin: '0 auto',
   });
@@ -76,10 +69,15 @@ function App() {
     setRandomEvents(getRandomEvents(16));
     setSelectedEvent(null);
   };
-
+  const handleMobileSlider = () => {
+    setMobileSlider(!mobileSlider)
+  }
+  const [mobileSlider, setMobileSlider] = useState(true);
   const [open, setOpen] = useState(false);
-
   
+  const [currentTheme, setCurrentTheme] = useState('light');
+  
+
   useEffect(() => {
     randomizeEvents();
   }, [events]);
@@ -130,11 +128,12 @@ function App() {
   };
   return (
     <ThemeProvider theme={theme}>
-          {!isDesktop && (
-            <div className="fixed z-[999] bottom-[35vh] top-auto translate-y-1/2 right-2"  >
-
+          {!isDesktop && mobileSlider && (
+            <div className="fixed z-[999] bottom-[47vh] top-auto translate-y-1/2 right-2 flex flex-col items-center gap-2"  >
               <VerticalSlider className="" setSelectedEvent={setSelectedEvent} yearRange={yearRange} setYearRange={setYearRange}/>
+
             </div>
+
           )}
 
           {!isDesktop && isSlider && (
@@ -151,13 +150,18 @@ function App() {
                             
           )}
       <div className="main-cont h-screen w-screen overflow-hidden">
-        <div className={`canvas flex flex-col relative transition-all h-full ${isDesktop && isOpen ? "max-w-[70%]" : "w-full"}`}>
-          {isDesktop?( <Navbar setSelectedEvent={setSelectedEvent} isOpen={isOpen} setIsOpen={setIsOpen} />):(<BottomAppBar isSlider={isSlider} setIsSlider={setIsSlider} />)}
+        <LeftDrawer setisLeftOpen={setisLeftOpen} isLeftOpen={isLeftOpen} events={events} onEventClick={setSelectedEvent}  />
+        <div className={`canvas flex flex-col relative  transition-all h-full
+         ${isDesktop && isOpen ? "max-w-[70%]" : "w-full"} 
+         `}>
+          {isDesktop?( <Navbar setSelectedEvent={setSelectedEvent} isLeftOpen={isLeftOpen} setisLeftOpen={setisLeftOpen} isOpen={isOpen} setIsOpen={setIsOpen} />):(<BottomAppBar isSlider={isSlider} setisLeftOpen={setisLeftOpen} isLeftOpen={isLeftOpen} mobileSlider={mobileSlider} 
+          setMobileSlider={setMobileSlider} setIsSlider={setIsSlider} />)}
           
           
           <div className="sliders-cont absolute flex flex-col items-center left-1/2 -translate-x-1/2 top-[88px] z-[999]">
             {isDesktop ? (
-              <div className="bg-gray-100/95 px-4 min-h-full rounded-full w-fit max-w-fit">
+              <div style={{ backgroundColor: themes.light.accent, opacity:0.73 }}className={` px-4 min-h-full rounded-md pb-2 w-fit max-w-fit`}>
+
                 <LeftSliders
                   yearRange={yearRange}
                   setSelectedEvent={setSelectedEvent}
@@ -166,16 +170,14 @@ function App() {
                   />
                    {/* <RightSliders setLimit={setLimit} colors={colors} pages={pages} currentPage={currentPage} setCurrentPage={setCurrentPage} limit={limit} filterTotalEvents={filterTotalEvents} totalEvents={totalEvents} />  */}
 
-          {/* <ChipsArray/> */}
               </div>
             ) : (
               <>
-              {/* Hello */}
               </>
             )}
           </div>
           {isDesktop ? (
-            <Drawer setIsOpen={setIsOpen} isOpen={isOpen} events={randomEvents} randomizeEvents={randomizeEvents} onEventClick={setSelectedEvent} />
+            <Drawer setIsOpen={setIsOpen} isOpen={isOpen}  randomEvents={randomEvents} randomizeEvents={randomizeEvents} onEventClick={setSelectedEvent} />
           ) : (
             <AlternativeDrawer events={randomEvents} onEventClick={setSelectedEvent} isSlider={isSlider} randomizeEvents={randomizeEvents} setIsSlider={setIsSlider} />
           )}
@@ -190,60 +192,5 @@ function App() {
 }
 
   
-// return (
-//     <ThemeProvider theme={theme}>
-
-        
-//         {/* Conditional rendering of Drawer vs AlternativeDrawer based on screen size */}
-//       <div className="main-cont h-screen w-screen overflow-hidden ">
-//                 <div className={`canvas flex flex-col relative  transition-all h-full ${
-//                   isOpen && window.innerWidth >= 1024 ? "max-w-[72%]" : "w-full"
-//                 }`} 
-//                 > 
-//                 {window.innerWidth >= 1024 && (
-//                   <Navbar setSelectedEvent={setSelectedEvent} isOpen={isOpen} setIsOpen={setIsOpen}/>
-//                 )}
-//  <div className="sliders-cont absolute  flex flex-col items-center left-[50%] -translate-x-1/2 top-20  z-[999]">
-//                 {/* Controls Container */}
-//                   {window.innerWidth >= 1024 ? (
-//                     <div className="bg-gray-100/80 px-1 minhf rounded-full w-fit max-w-fit">
-//                     <LeftSliders yearRange={yearRange}
-//                       setSelectedEvent={setSelectedEvent}
-//                       setYearRange={setYearRange}
-//                       setSelectedCategory={setSelectedCategory}
-//                     />
-                //  {/* <RightSliders setLimit={setLimit} colors={colors} pages={pages} currentPage={currentPage} setCurrentPage={setCurrentPage} limit={limit} filterTotalEvents={filterTotalEvents} totalEvents={totalEvents} />  */}
-//                 </div>
-             
-//                   ) : (<>Hello</>)}
-//               </div> 
-//                 {window.innerWidth >= 1024 ? (
-//                   <Drawer setIsOpen={setIsOpen} isOpen={isOpen} events={randomEvents} randomizeEvents={randomizeEvents} onEventClick={setSelectedEvent} />
-//                 ) : (
-//                   <AlternativeDrawer events={randomEvents} onEventClick={setSelectedEvent} isSlider={isSlider} setIsSlider={setIsSlider}/>
-//                 )}
-//                 {/* Mobile Random Events Button */}
-//                 {window.innerWidth < 1024 && (
-//                   <div className="absolute z-[9999] bottom-28 left-1/2 -translate-x-1/2">
-//                     <button onClick={() => setIsSlider(!isSlider)}
-//                       className="bg-white px-6 py-2 rounded-full shadow-lg"
-//                     >{!isSlider?"Random Events":"Close"}
-//                     </button>
-//                   </div>
-//                 )}
-               
-//           {/* Main Content Container */}
-//               {/* Content Section */}
-//                 {/* Map Container - Full screen for mobile, full container for desktop */}
-//                 {/* <div className={`inset-0 ${ window.innerWidth >= 1024?"top-16":""} w-full `}> */}
-//                 <div className={`relative inset-0 h-full w-full `}>
-//                   <MapComponent events={events} selectedEvent={selectedEvent}/>
-//                 </div> 
-//         </div>
-//       </div>
-//     </ThemeProvider>
-//   );
-
-// }
 
 export default App;

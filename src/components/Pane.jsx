@@ -1,9 +1,11 @@
 import { Drawer, IconButton, SwipeableDrawer } from "@mui/material";
 import MenuIcon from "@mui/icons-material/Menu";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import EventTimeline from "./EventTimeline";
 
-const Pane = ({ isOpen, setIsOpen, events, randomizeEvents, onEventClick }) => {
+const Pane = ({ isOpen, setIsOpen, events, randomEvents, randomizeEvents, onEventClick }) => {
 
+  
   return (
     <>
       <Drawer
@@ -12,13 +14,13 @@ const Pane = ({ isOpen, setIsOpen, events, randomizeEvents, onEventClick }) => {
         open={isOpen}
         sx={{
           "& .MuiDrawer-paper": {
-            width:'30%', // Adjust the width as needed
+            width:'30%', 
             backgroundColor: "#f7f7f7",
             boxShadow: "0 0 30px rgba(0, 0, 0, 0.1)",
           },
         }}
       >
-        {/* Pane Header */}
+        
         <div className="flex items-center mt-3 px-4 pb-3 justify-between">
           <h2 className="text-lg font-semibold">Random Events</h2>
           <button
@@ -29,10 +31,12 @@ const Pane = ({ isOpen, setIsOpen, events, randomizeEvents, onEventClick }) => {
           </button>
         </div>
 
-        {/* Pane Content */}
+        <div className="px-4 ">
+
+        </div>
         <div className="p-4 overflow-y-auto">
           <ul className="space-y-4">
-            {events.map((event) => (
+            {randomEvents.map((event) => (
               <li
                 key={event._id}
                 className="p-3 bg-white rounded shadow hover:shadow-lg transition-shadow cursor-pointer"
@@ -54,7 +58,6 @@ const Pane = ({ isOpen, setIsOpen, events, randomizeEvents, onEventClick }) => {
                     ):null}
                   </div>
 
-                  {/* Event Details */}
                   <div className="flex-grow ml-4">
                     <h3 className="text-base font-medium line-clamp-2">
                       {event.title}
@@ -62,7 +65,6 @@ const Pane = ({ isOpen, setIsOpen, events, randomizeEvents, onEventClick }) => {
                     <p className="text-sm text-gray-600">{event.year}</p>
                   </div>
 
-                  {/* Category */}
                   <div className="bg-gray-500 text-white text-sm px-2 py-1 rounded">
                     {event.category}
                   </div>

@@ -8,8 +8,8 @@ import Fab from '@mui/material/Fab';
 import MenuIcon from '@mui/icons-material/Menu';
 import UpIcon from '@mui/icons-material/ArrowUpwardTwoTone';
 import SearchIcon from '@mui/icons-material/Search';
-import MoreIcon from '@mui/icons-material/MoreVert';
-
+import MoreIcon from '@mui/icons-material/Timeline';
+import CommitIcon from '@mui/icons-material/Commit';
 
 const StyledFab = styled(Fab)({
   position: 'absolute',
@@ -20,13 +20,13 @@ const StyledFab = styled(Fab)({
   margin: '0 auto',
 });
 
-export default function BottomAppBar({setIsSlider, isSlider}) {
+export default function BottomAppBar({setIsSlider, isSlider, isLeftOpen, mobileSlider, setMobileSlider, setisLeftOpen}) {
   return (
     <>
      
       <AppBar position="fixed" color="info"  sx={{ top: 'auto',maxHeight:"fit", bottom: 0 }}>
         <Toolbar>
-          <IconButton color="inherit" aria-label="open drawer">
+          <IconButton color="inherit" onClick={() => setisLeftOpen(!isLeftOpen)} aria-label="open drawer">
             <MenuIcon />
           </IconButton>
           <StyledFab onClick={() =>setIsSlider(!isSlider)} color="secondary" aria-label="add">
@@ -36,8 +36,9 @@ export default function BottomAppBar({setIsSlider, isSlider}) {
           <IconButton color="inherit">
             <SearchIcon />
           </IconButton>
-          <IconButton color="inherit">
-            <MoreIcon  />
+          <IconButton onClick={()=>
+            setMobileSlider(!mobileSlider)} color="inherit">
+            <CommitIcon  />
           </IconButton>
         </Toolbar>
       </AppBar>

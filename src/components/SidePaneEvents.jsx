@@ -7,7 +7,7 @@ const SidePaneEvents = ({ events, randomizeEvents, onEventClick }) => {
 
         <h2 className="text-lg pl-7 font-semibold mb-4">Random Events</h2>
     <button
-        onClick={randomizeEvents} // Randomize the events when clicked
+        onClick={randomizeEvents} 
         className="mb-4 px-4 py-2 ml-7 bg-blue-500 text-white rounded-md hover:bg-blue-600"
         >
         Randomize
@@ -23,7 +23,6 @@ const SidePaneEvents = ({ events, randomizeEvents, onEventClick }) => {
           >
             <div className="flex min-w-full items-center justify-between ">
               <div className="left_section flex items-center gap-4">
-                {/* Image or Placeholder */}
                 <div
                   className={`h-16 w-16 min-w-16 rounded-md ${
                     event.thumbnail ? "overflow-hidden" : "bg-gray-300"
@@ -38,7 +37,6 @@ const SidePaneEvents = ({ events, randomizeEvents, onEventClick }) => {
                   ) : null}
                 </div>
 
-                {/* Text Content */}
                 <div className="flex flex-col">
                   <h3 className="text-base font-medium text-gray-800 line-clamp-2">
                     {event.title}

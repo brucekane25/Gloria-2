@@ -14,20 +14,18 @@ import { colors } from "@mui/material";
 
 const MapComponent = ({ events, selectedEvent }) => {
   const customIcon = L.icon({
-    iconUrl: "/marker-icon.png", // Path to your icon
-    iconSize: [25, 41], // Size of the icon
-    iconAnchor: [12, 41], // Anchor point of the icon
-    popupAnchor: [1, -34], // Popup's anchor point
-    shadowUrl: `/marker-shadow.png`, // Optional shadow image
-    shadowSize: [41, 41], // Size of the shadow
+    iconUrl: "/marker-icon.png",
+    iconSize: [25, 41],
+    iconAnchor: [12, 41],
+    popupAnchor: [1, -34],
+    shadowUrl: `/marker-shadow.png`,
+    shadowSize: [41, 41],
   });
-  
-  
-  const defaultPosition = [20.5937, 78.9629]; // Default to India
-  const markersRef = useRef({}); // To store markers
-  const clusterGroupRef = useRef(null); // To store cluster group reference
 
-  // Component to handle map updates
+  const defaultPosition = [20.5937, 78.9629];
+  const markersRef = useRef({});
+  const clusterGroupRef = useRef(null);
+
   const MapUpdater = ({ selectedEvent }) => {
     const map = useMap();
 
@@ -37,12 +35,11 @@ const MapComponent = ({ events, selectedEvent }) => {
         const clusterGroup = clusterGroupRef.current;
 
         if (marker && clusterGroup) {
-          // Ensure zoomToShowLayer works only when marker is part of the cluster group
           setTimeout(() => {
             clusterGroup.zoomToShowLayer(marker, () => {
               marker.openPopup();
             });
-          }, 100); // Adjust delay if necessary
+          }, 100);
         } else {
           console.warn("Marker not found or not part of the cluster group.");
         }
@@ -63,21 +60,20 @@ const MapComponent = ({ events, selectedEvent }) => {
         [90, 280],
       ]}
       maxBoundsViscosity={1}
-      style={{ margin: 0, padding:0, minHeight: "100%", width: "100%" }}
+      style={{ margin: 0, padding: 0, minHeight: "100%", width: "100%" }}
     >
       <LayersControl position="topright">
-        <LayersControl.Overlay  name="OpenStreetMap">
+        <LayersControl.Overlay name="OpenStreetMap">
           <TileLayer
             attribution='<a href="https://www.maptiler.com/copyright">OpenStreetMap</a>'
             url={`https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png?key=2b4nj2gRRkpUERQZxBXB`}
           />
         </LayersControl.Overlay>
 
-        <LayersControl.Overlay  name="MapTiler">
+        <LayersControl.Overlay checked name="MapTiler">
           <TileLayer
             attribution='<a href="https://www.maptiler.com/copyright">MapTiler</a>'
-            // url={`https://api.maptiler.com/tiles/satellite-v2/{z}/{x}/{y}.jpg?key=2b4nj2gRRkpUERQZxBXB`}
-            url={`https://api.maptiler.com/maps/streets/{z}/{x}/{y}.png?key=2b4nj2gRRkpUERQZxBXB`}
+            url={`https://api.maptiler.com/maps/streets/{z}/{x}/{y}.png?key=pUdLG48OR57uT9vDP5mK`}
           />
         </LayersControl.Overlay>
 
@@ -95,16 +91,16 @@ const MapComponent = ({ events, selectedEvent }) => {
           />
         </LayersControl.Overlay>
 
-        <LayersControl.Overlay checked name="Detailed">
+        <LayersControl.Overlay name="Detailed">
           <TileLayer
             attribution='<a href="https://www.maptiler.com/copyright">ThunderForestMaps</a>'
-            url="https://server.arcgisonline.com/ArcGIS/rest/services/World_Street_Map/MapServer/tile/{z}/{y}/{x}" // colorful map nice details
+            url="https://server.arcgisonline.com/ArcGIS/rest/services/World_Street_Map/MapServer/tile/{z}/{y}/{x}"
           />
         </LayersControl.Overlay>
         <LayersControl.Overlay name="LightGray">
           <TileLayer
             attribution='<a href="https://www.maptiler.com/copyright">ThunderForestMaps</a>'
-            url="https://services.arcgisonline.com/ArcGIS/rest/services/Canvas/World_Light_Gray_Base/MapServer/tile/{z}/{y}/{x}" //light map
+            url="https://services.arcgisonline.com/ArcGIS/rest/services/Canvas/World_Light_Gray_Base/MapServer/tile/{z}/{y}/{x}"
           />
         </LayersControl.Overlay>
       </LayersControl>
@@ -137,7 +133,6 @@ const MapComponent = ({ events, selectedEvent }) => {
             <Popup>
               <div className="min-w-[370px] max-w-2xl p-4 bg-white rounded-lg shadow-2xl">
                 <div className="flex flex-row gap-6">
-                  {/* Thumbnail */}
                   {event.thumbnail && (
                     <img
                       className="h-40 w-40 object-cover rounded-md flex-shrink"
@@ -146,7 +141,6 @@ const MapComponent = ({ events, selectedEvent }) => {
                     />
                   )}
 
-                  {/* Text Content */}
                   <div className="flex flex-col justify-between gap-3 flex-grow">
                     <div>
                       <h3 className="text-base line-clamp-6 font-normal  text-gray-900 ">

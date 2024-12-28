@@ -78,7 +78,6 @@ const categorizeEvents = (events) => {
     ]
   };
 
-  // Your logic for categorizing the events goes here
 
 
   const classifyEvent = (event) => {
@@ -88,7 +87,7 @@ const categorizeEvents = (events) => {
         return category;
       }
     }
-    return event.category || null; // Retain previous category if available
+    return event.category || null; 
   };
 
   return events.map((event) => ({

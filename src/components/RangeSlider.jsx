@@ -9,11 +9,10 @@ const RangeSlider = ({ setSelectedEvent, yearRange, setYearRange }) => {
   const [temporaryRange, setTemporaryRange] = useState([yearRange.startYear, yearRange.endYear]);
 
   const handleChange = (event, newValue) => {
-    setTemporaryRange(newValue); // Update the temporary range while sliding
+    setTemporaryRange(newValue);
   };
 
   const handleChangeCommitted = (event, newValue) => {
-    // Update the yearRange and selectedEvent after the slider is released
     setYearRange({ startYear: newValue[0], endYear: newValue[1] });
     setSelectedEvent({ startYear: newValue[0], endYear: newValue[1] });
   };
@@ -41,7 +40,7 @@ const RangeSlider = ({ setSelectedEvent, yearRange, setYearRange }) => {
   };
 
   return (
-    <Box sx={{ minWidth:"700px"  }}>
+    <Box sx={{ minWidth: "700px" }}>
       <Typography id="input-slider" textAlign={'center'} gutterBottom>
         Year Range:
       </Typography>

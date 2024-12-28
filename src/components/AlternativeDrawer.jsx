@@ -11,7 +11,7 @@ const AlternativeDrawer = ({ isSlider, setIsSlider, events, randomizeEvents, onE
         onClose={() => setIsSlider(false)}
         onOpen={() => setIsSlider(true)}
         
-        swipeAreaWidth={20} // Adjust the swipe area width
+        swipeAreaWidth={40} 
         sx={{
           "& .MuiDrawer-paper": {
             backgroundColor: "rgba(1,1,1,0.5 )",
@@ -20,7 +20,6 @@ const AlternativeDrawer = ({ isSlider, setIsSlider, events, randomizeEvents, onE
           
         }}
       >
-        {/* Drawer Header */}
         <div  className="flex items-center pb-3 mt-2 px-4 justify-between">
           <h2 aria-label="close drawer" onClick={() => {setIsSlider(false)}} className="text-2xl text-white font-bold">Random Events</h2>
           <button
@@ -29,15 +28,8 @@ const AlternativeDrawer = ({ isSlider, setIsSlider, events, randomizeEvents, onE
           >
             Randomize
           </button>
-          {/* <IconButton
-            onClick={() => setIsSlider(false)}
-            aria-label="close drawer"
-          >
-            <MenuIcon />
-          </IconButton> */}
         </div>
 
-        {/* Drawer Content */}
         <div className="p-1 overflow-auto max-h-[60vh] min-w-[320px]">
           <ul className="space-y-2">
             {events.map((event) => (
@@ -51,7 +43,6 @@ const AlternativeDrawer = ({ isSlider, setIsSlider, events, randomizeEvents, onE
               }
               >
                 <div className="flex items-center justify-between">
-                  {/* Thumbnail */}
                   <div
                     className={`h-14 min-w-14 rounded-md ${
                       event.thumbnail ? "overflow-hidden" : "bg-gray-300"
@@ -66,7 +57,6 @@ const AlternativeDrawer = ({ isSlider, setIsSlider, events, randomizeEvents, onE
                     ) : null}
                   </div>
 
-                  {/* Event Details */}
                   <div className="flex-grow ml-4">
                     <h3 className="text-base font-medium line-clamp-2">
                       {event.title}
@@ -74,7 +64,6 @@ const AlternativeDrawer = ({ isSlider, setIsSlider, events, randomizeEvents, onE
                     <p className="text-sm text-gray-600">{event.year}</p>
                   </div>
 
-                  {/* Category */}
                   <div className="bg-gray-800 text-white text-sm px-2 py-1 rounded">
                     {event.category}
                   </div>

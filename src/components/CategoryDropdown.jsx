@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 
 const CategoryDropdown = ({ onCategoryChange, clr }) => {
   const categories = [
-    { value: "", label: "All" }, // Representing "All" categories
+    { value: "", label: "All" }, 
     { value: "selected", label: "Selected" },
     { value: "births", label: "Births" },
     { value: "deaths", label: "Deaths" },

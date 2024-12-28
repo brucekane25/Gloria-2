@@ -46,9 +46,7 @@ const VerticalSlider = ({ setSelectedEvent, yearRange, setYearRange }) => {
         paddingX: '9px',
         borderRadius: '8px',
         boxShadow: '0px 4px 6px rgba(0, 0, 0, 0.1)',
-        // maxWidth: '400px',
-        // margin: 'auto',
-        // marginBottom:"3px" 
+       
       }}
     >
       <Stack direction="row" spacing={2} alignItems="center" justifyContent="center">
@@ -57,7 +55,7 @@ const VerticalSlider = ({ setSelectedEvent, yearRange, setYearRange }) => {
             display: 'flex',
             flexDirection: 'column',
             alignItems: 'center',
-            height: '47vh',
+            height: '56vh',
             width: '100%',
           }}
         >
@@ -95,7 +93,7 @@ const VerticalSlider = ({ setSelectedEvent, yearRange, setYearRange }) => {
             max={2024}
             aria-labelledby="range-slider"
             color="secondary"
-            sx={{ height: '100%' }}
+            sx={{ height:'full' ,minHeight: '70px' }}
           />
           <Input
             value={temporaryRange[0]}
