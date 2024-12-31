@@ -33,9 +33,9 @@ export default function BottomAppBar({setIsSlider, isSlider, isLeftOpen, mobileS
             <UpIcon />
           </StyledFab>
           <Box sx={{ flexGrow: 1 }} />
-          <IconButton color="inherit">
+          {/* <IconButton color="inherit">
             <SearchIcon />
-          </IconButton>
+          </IconButton> */}
           <IconButton onClick={()=>
             setMobileSlider(!mobileSlider)} color="inherit">
             <CommitIcon  />

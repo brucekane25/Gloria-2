@@ -11,10 +11,10 @@ export default function SimpleBackdrop({open, setOpen}) {
       <Backdrop
         sx={(theme) => ({ color: '#fff', zIndex: theme.zIndex.drawer + 1 })}
         open={open}
-        onClick={() => {
-          setOpen(!open)
-        }
-        }
+        // onClick={() => {
+        //   setOpen(!open)
+        // }
+        // }
         
       >
         <CircularProgress color="inherit" />

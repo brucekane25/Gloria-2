@@ -40,7 +40,7 @@ const LeftDrawer = ({ isLeftOpen, setisLeftOpen, events ,onEventClick}) => {
         </div>
 
         <div className=" h-4 px-1 ">
-          <EventTimeline events={events} onEventClick={onEventClick}/>
+          <EventTimeline events={events} isLeftOpen={isLeftOpen} setisLeftOpen ={setisLeftOpen} onEventClick={onEventClick}/>
         </div>
       </Drawer>
     </>
