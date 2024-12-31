@@ -12,9 +12,8 @@ import Button from '@mui/material/Button';
 import Tooltip from '@mui/material/Tooltip';
 import MenuItem from '@mui/material/MenuItem';
 import AdbIcon from '@mui/icons-material/Map';
-
-const pages = ['Globe', 'Portfolio', 'Blog'];
-const settings = ['Github Profile', 'Account', 'Dashboard'];
+import GithubIcon from '@mui/icons-material/GitHub';
+// const settings = ['Github Profile', 'Account', 'Dashboard'];
 
 function Navbar({isOpen, isLeftOpen, setisLeftOpen, setSelectedEvent, setIsOpen}) {
   const [anchorElNav, setAnchorElNav] = React.useState(null);
@@ -106,33 +105,11 @@ function Navbar({isOpen, isLeftOpen, setisLeftOpen, setSelectedEvent, setIsOpen}
               </Menu>
             </Box>
             <Box sx={{ flexGrow: 0 }}>
-              <Tooltip title="Open settings">
-                <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-                  <Avatar alt="Remy Sharp" src="/static/images/avatar/2.jpg" />
+              <Tooltip title="Github Page">
+                <IconButton href='https://github.com/brucekane25/' sx={{ p: 0 }}>
+                  <GithubIcon/>   
                 </IconButton>
               </Tooltip>
-              <Menu
-                sx={{ mt: '45px' }}
-                id="menu-appbar"
-                anchorEl={anchorElUser}
-                anchorOrigin={{
-                  vertical: 'top',
-                  horizontal: 'right',
-                }}
-                keepMounted
-                transformOrigin={{
-                  vertical: 'top',
-                  horizontal: 'right',
-                }}
-                open={Boolean(anchorElUser)}
-                onClose={handleCloseUserMenu}
-              >
-                {settings.map((setting) => (
-                  <MenuItem key={setting} onClick={handleCloseUserMenu}>
-                    <Typography sx={{ textAlign: 'center' }}>{setting}</Typography>
-                  </MenuItem>
-                ))}
-              </Menu>
             </Box>
           </div>
         </Toolbar>

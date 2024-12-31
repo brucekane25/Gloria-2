@@ -5,7 +5,7 @@ const EventTimeline = ({ events, onEventClick,isLeftOpen, setisLeftOpen }) => {
   const sortedEvents = [...events].sort((a, b) => b.year - a.year);
 
   return (
-    <Timeline position="alternate" className="max-h-[88vh] overflow-y-scroll p-3 bg-gray-100 rounded-md drop-shadow-xl">
+    <Timeline position="alternate" className="max-h-[88vh] overflow-y-scroll p-3  rounded-md drop-shadow-xl">
       {sortedEvents.map((event) => (
         <TimelineItem key={event._id}>
           <TimelineSeparator>
