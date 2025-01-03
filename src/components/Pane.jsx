@@ -1,7 +1,6 @@
 import { Drawer, IconButton, SwipeableDrawer } from "@mui/material";
 import MenuIcon from "@mui/icons-material/Menu";
 import { useEffect, useState } from "react";
-import EventTimeline from "./EventTimeline";
 
 const Pane = ({ isOpen, setIsOpen, events, randomEvents, randomizeEvents, onEventClick }) => {
 
