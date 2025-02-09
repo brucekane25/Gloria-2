@@ -22,7 +22,7 @@ function App() {
   const [currentPage, setCurrentPage] = useState(1);
   const [pages, setPages] = useState(1);
   const [filterpages, setFilterPages] = useState(0);
-  const [limit, setLimit] = useState(2900);
+  const [limit, setLimit] = useState(4200);
   const [selectedCategory, setSelectedCategory] = useState("");
   const [randomEvents, setRandomEvents] = useState([]);
   const [totalEvents, setTotalEvents] = useState(null); 
