@@ -6,7 +6,7 @@ import Slider from "@mui/material/Slider";
 import RangeSlider from "./RangeSlider";
 import RightSliders from "./RightSliders";
 import { themes } from "../themes/colorThemes";
-import world from "../assets/countries";
+// import world from "../assets/countries";
 import CategoryDropdown from "./CategoryDropdown";
 
 export default function SettingsPanel({
@@ -65,16 +65,16 @@ export default function SettingsPanel({
         </div> */}
 
         <div className={`${isDesktop?'space-y-4 mb-3':'space-y-2 mb-2' } `}>
-          <div
+          {/* <div
             style={{
               backgroundColor: mode
                 ? themes.light.sbackground
                 : themes.dark.sbackground,
             }}
             className="flex items-center justify-around p-2 h-16 rounded-lg"
-          >
+          > */}
             {/* <span className="text-sm font-medium">Country</span> */}
-            <select
+            {/* <select
               style={{
                 backgroundColor: !mode ? themes.light.text : themes.dark.text,
               }}
@@ -89,8 +89,8 @@ export default function SettingsPanel({
                   {world.features[index].properties.ADMIN}
                 </option>
               ))}
-            </select>
-          </div>
+            </select> */}
+          {/* </div> */}
           <div
             style={{
               backgroundColor: mode
