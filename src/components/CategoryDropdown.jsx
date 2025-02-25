@@ -1,49 +1,82 @@
-import React, { useState, useEffect } from "react";
+import { useState } from "react";
+import { Chip, Stack } from "@mui/material";
+import EventIcon from "@mui/icons-material/Event";
+import CakeIcon from "@mui/icons-material/Cake";
+import SentimentDissatisfiedIcon from "@mui/icons-material/SentimentDissatisfied";
+import PublicIcon from "@mui/icons-material/Public";
+import HistoryIcon from "@mui/icons-material/History";
+import ScienceIcon from "@mui/icons-material/Science";
+import MilitaryTechIcon from "@mui/icons-material/MilitaryTech";
+import AttachMoneyIcon from "@mui/icons-material/AttachMoney";
+import GroupIcon from "@mui/icons-material/Group";
+import ReportProblemIcon from "@mui/icons-material/ReportProblem";
+import ChurchIcon from "@mui/icons-material/Church";
+import PaletteIcon from "@mui/icons-material/Palette";
+import EcoIcon from "@mui/icons-material/Nature";
+import SearchIcon from "@mui/icons-material/Search";
+import CategoryIcon from "@mui/icons-material/Category";
 
-const CategoryDropdown = ({ onCategoryChange, clr }) => {
+const CategoryDropdown = ({ onCategoryChange, clr, mode }) => {
   const categories = [
-    { value: "", label: "All" }, 
-    { value: "selected", label: "Selected" },
-    { value: "births", label: "Births" },
-    { value: "deaths", label: "Deaths" },
-    { value: "events", label: "Events" },
-    { value: "political", label: "Political" },
-    { value: "historical", label: "Historical" },
-    { value: "scientific", label: "Scientific" },
-    { value: "war", label: "War" },
-    { value: "economic", label: "Economic" },
-    { value: "social", label: "Social" },
-    { value: "disasters", label: "Disasters" },
-    { value: "religious", label: "Religion" },
-    { value: "cultural", label: "Cultural" },
-    { value: "environmental", label: "Environmental" },
-    { value: "discoveries", label: "Discoveries" },
+    { value: "selected", label: "Selected", icon: <SearchIcon /> },
+    { value: "births", label: "Births", icon: <CakeIcon /> },
+    { value: "deaths", label: "Deaths", icon: <SentimentDissatisfiedIcon /> },
+    { value: "events", label: "Events", icon: <EventIcon /> },
+    { value: "political", label: "Political", icon: <PublicIcon /> },
+    { value: "historical", label: "Historical", icon: <HistoryIcon /> },
+    { value: "scientific", label: "Scientific", icon: <ScienceIcon /> },
+    { value: "war", label: "War", icon: <MilitaryTechIcon /> },
+    { value: "economic", label: "Economic", icon: <AttachMoneyIcon /> },
+    { value: "social", label: "Social", icon: <GroupIcon /> },
+    { value: "disasters", label: "Disasters", icon: <ReportProblemIcon /> },
+    { value: "religious", label: "Religion", icon: <ChurchIcon /> },
+    { value: "cultural", label: "Cultural", icon: <PaletteIcon /> },
+    { value: "environmental", label: "Environmental", icon: <EcoIcon /> },
+    { value: "discoveries", label: "Discoveries", icon: <CategoryIcon /> },
   ];
 
-  const [selectedCategory, setSelectedCategory] = useState("");
+  const [selectedCategories, setSelectedCategories] = useState([]);
 
-  const handleChange = (e) => {
-    const newCategory = e.target.value;
-    setSelectedCategory(newCategory);
-    onCategoryChange(newCategory);
-    clr(null)
+  const handleCategorySelect = (value) => {
+    setSelectedCategories((prevCategories) => {
+      const updatedCategories = prevCategories.includes(value)
+        ? prevCategories.filter((category) => category !== value)
+        : [...prevCategories, value];
+
+      onCategoryChange(updatedCategories);
+      clr(null);
+      return updatedCategories;
+    });
   };
 
   return (
-    <div>
-      <label htmlFor="category-dropdown">Category: </label>
-      <select
-        id="category-dropdown"
-        value={selectedCategory}
-        onChange={handleChange}
-      >
-        {categories.map((category) => (
-          <option key={category.value} value={category.value}>
-            {category.label}
-          </option>
-        ))}
-      </select>
-    </div>
+    <Stack direction="row" spacing={1} flexWrap="wrap" columnGap={1} rowGap={1} className="flex justify-center items-center">
+      {categories.map((category) => (
+        <Chip
+          key={category.value}
+          label={category.label}
+          icon={category.icon}
+          onClick={() => handleCategorySelect(category.value)}
+          onDelete={
+            selectedCategories.includes(category.value)
+              ? () => handleCategorySelect(category.value)
+              : undefined
+          }
+          color={selectedCategories.includes(category.value) ? mode?"success":'error' : "default"}
+          variant="filled"
+          style={{
+            // backgroundColor: selectedCategories.includes(category.value)
+            //   ? mode
+            //     ? "#90caf9" // Light blue for dark mode
+            //     : "#1976d2" // Default blue for light mode
+            //   : !mode
+            //   ? "#424242" // Grey for dark mode
+            //   : "#e0e0e0", // Light grey for light mode
+            color: selectedCategories.includes(category.value) ? "white" : !mode ? "#fff" : "#000",
+          }}
+        />
+      ))}
+    </Stack>
   );
 };
 

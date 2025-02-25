@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import {
   MapContainer,
   TileLayer,
@@ -8,23 +8,51 @@ import {
   LayersControl,
 } from "react-leaflet";
 import MarkerClusterGroup from "react-leaflet-markercluster";
-import indiaOutline from "../assets/India_Outline_Map";
+// import world from "../assets/countries.js";
 import { GeoJSON } from "react-leaflet";
-import { colors } from "@mui/material";
+import india_outline from "../assets/India_Outline_Map.js";
+import { themes } from "../themes/colorThemes.js";
 
-const MapComponent = ({ events, selectedEvent }) => {
+const MapComponent = ({ events, selectedEvent, mode }) => {
   const customIcon = L.icon({
     iconUrl: "/marker-icon.png",
     iconSize: [25, 41],
     iconAnchor: [12, 41],
     popupAnchor: [1, -34],
-    shadowUrl: `/marker-shadow.png`,
+    shadowUrl: "/marker-shadow.png",
     shadowSize: [41, 41],
   });
 
   const defaultPosition = [20.5937, 78.9629];
   const markersRef = useRef({});
   const clusterGroupRef = useRef(null);
+  const [filteredEvents, setFilteredEvents] = useState([]);
+  const geoJsonRef = useRef(null); // Ref to store the GeoJSON layer
+
+  // Reset clusters, markers, and GeoJSON when the country changes
+  // useEffect(() => {
+  //   if (country != null && world.features[country]) {
+  //     // Clear the previous GeoJSON layer
+  //     if (geoJsonRef.current) {
+  //       geoJsonRef.current.remove(); // Remove the previous GeoJSON layer
+  //     }
+
+  //     // Filter events for the new country
+  //     const geoJsonLayer = L.geoJSON(world.features[country]);
+  //     const filtered = events.filter((event) =>
+  //       geoJsonLayer.getBounds().contains([event.coordinates.lat, event.coordinates.lon])
+  //     );
+  //     setFilteredEvents(filtered);
+
+  //     // Clear the previous markers and clusters
+  //     if (clusterGroupRef.current) {
+  //       clusterGroupRef.current.clearLayers();
+  //     }
+  //   } else {
+  //     // If no country is selected, show all events
+  //     setFilteredEvents(events);
+  //   }
+  // }, [country, events]);
 
   const MapUpdater = ({ selectedEvent }) => {
     const map = useMap();
@@ -49,6 +77,26 @@ const MapComponent = ({ events, selectedEvent }) => {
     return null;
   };
 
+  // const CountryFocus = ({ country }) => {
+  //   const map = useMap();
+
+  //   useEffect(() => {
+  //     if (country != null && world.features[country]) {
+  //       const bounds = L.geoJSON(world.features[country]).getBounds();
+  //       map.fitBounds(bounds, { padding: [50, 50] });
+  //     }
+  //   }, [country, map]);
+
+  //   return null;
+  // };
+
+  useEffect(() => {
+    const mapContainer = document.querySelector(".leaflet-container");
+    if (mapContainer) {
+      mapContainer.style.backgroundColor = mode ? "white" : "black";
+    }
+  }, [mode]);
+
   return (
     <MapContainer
       center={defaultPosition}
@@ -66,25 +114,18 @@ const MapComponent = ({ events, selectedEvent }) => {
         <LayersControl.Overlay name="OpenStreetMap">
           <TileLayer
             attribution='<a href="https://www.maptiler.com/copyright">OpenStreetMap</a>'
-            url={`https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png?key=2b4nj2gRRkpUERQZxBXB`}
+            url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png?key=2b4nj2gRRkpUERQZxBXB"
           />
         </LayersControl.Overlay>
 
-        <LayersControl.Overlay checked name="MapTiler">
+        <LayersControl.Overlay checked={mode} name="MapTiler">
           <TileLayer
             attribution='<a href="https://www.maptiler.com/copyright">MapTiler</a>'
-            url={`https://api.maptiler.com/maps/streets/{z}/{x}/{y}.png?key=pUdLG48OR57uT9vDP5mK`}
+            url="https://api.maptiler.com/maps/streets/{z}/{x}/{y}.png?key=pUdLG48OR57uT9vDP5mK"
           />
         </LayersControl.Overlay>
 
-        <LayersControl.Overlay name="StadiaMap-Dark">
-          <TileLayer
-            attribution='<a href="https://www.maptiler.com/copyright">StadiaMaps</a>'
-            url="https://tiles.stadiamaps.com/tiles/alidade_smooth_dark/{z}/{x}/{y}{r}.png"
-          />
-        </LayersControl.Overlay>
-
-        <LayersControl.Overlay name="CartoCDN-dark">
+        <LayersControl.Overlay checked={!mode} name="CartoCDN-dark">
           <TileLayer
             attribution='<a href="https://www.maptiler.com/copyright">ThunderForestMaps</a>'
             url="https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png"
@@ -97,6 +138,7 @@ const MapComponent = ({ events, selectedEvent }) => {
             url="https://server.arcgisonline.com/ArcGIS/rest/services/World_Street_Map/MapServer/tile/{z}/{y}/{x}"
           />
         </LayersControl.Overlay>
+
         <LayersControl.Overlay name="LightGray">
           <TileLayer
             attribution='<a href="https://www.maptiler.com/copyright">ThunderForestMaps</a>'
@@ -105,19 +147,40 @@ const MapComponent = ({ events, selectedEvent }) => {
         </LayersControl.Overlay>
       </LayersControl>
 
+      {/* India Outline */}
       <GeoJSON
-        data={indiaOutline}
+        data={india_outline}
         style={{
-          color: "black",
-          weight: 1 / 7,
+          color: mode ? "black" : "grey",
+          weight: 1/8 ,
           opacity: 1,
           fillOpacity: 0,
         }}
-      ></GeoJSON>
+      />
+
+      {/* Country GeoJSON */}
+      {/* {country && world.features[country] && (
+        <GeoJSON
+          key={country} // Force remount on country change
+          data={world.features[country]}
+          ref={geoJsonRef} // Store the GeoJSON layer in a ref
+          style={{
+            color: mode ? "black" : "grey",
+            weight: 1,
+            opacity: 1,
+            fillOpacity: 0.7,
+          }}
+        />
+      )} */}
+
+      {/* MarkerClusterGroup */}
       <MarkerClusterGroup
+        // key={country} // Force remount on country change
         ref={clusterGroupRef}
         disableClusteringAtZoom={9}
         maxClusterRadius={60}
+        animate
+        
       >
         {events.map((event) => (
           <Marker
@@ -131,7 +194,7 @@ const MapComponent = ({ events, selectedEvent }) => {
             }}
           >
             <Popup>
-              <div className="min-w-[370px] max-w-2xl p-4 bg-white rounded-lg shadow-2xl">
+              <div style={{backgroundColor:mode?'white':themes.dark.sbackground}} className="min-w-[370px] max-w-2xl p-4 rounded-lg shadow-2xl">
                 <div className="flex flex-row gap-6">
                   {event.thumbnail && (
                     <img
@@ -143,23 +206,23 @@ const MapComponent = ({ events, selectedEvent }) => {
 
                   <div className="flex flex-col justify-between gap-3 flex-grow">
                     <div>
-                      <h3 className="text-base line-clamp-6 font-normal  text-gray-900 ">
+                      <h3 style={{color:mode?themes.light.text:themes.dark.text}} className="text-base line-clamp-6 font-normal">
                         {event.title}
                       </h3>
                       <a
                         href={`https://en.wikipedia.org/?curid=${event.pageID}`}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="text-blue-900 hover:underline text-sm"
+                        className="text-blue-700 hover:underline text-sm"
                       >
                         Know More
                       </a>
                     </div>
-                    <div className="flex justify-between items-center">
-                      <h3 className="text-lg font-semibold text-gray-700">
+                    <div  style={{color:mode?themes.light.text:themes.dark.text}} className="flex justify-between items-center">
+                      <h3 className="text-lg font-semibold ">
                         {event.year}
                       </h3>
-                      <h3 className="text-base font-medium text-gray-500">
+                      <h3 className="text-base font-medium ">
                         {event.category}
                       </h3>
                     </div>
@@ -172,6 +235,7 @@ const MapComponent = ({ events, selectedEvent }) => {
       </MarkerClusterGroup>
 
       <MapUpdater selectedEvent={selectedEvent} />
+      {/* <CountryFocus country={country} /> */}
     </MapContainer>
   );
 };

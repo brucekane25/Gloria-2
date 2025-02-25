@@ -7,8 +7,15 @@ import {
   TimelineConnector,
 } from "@mui/lab";
 import { FixedSizeList as List } from "react-window";
+import { themes } from "../themes/colorThemes";
 
-const EventTimeline = ({ events, onEventClick, isLeftOpen, setisLeftOpen }) => {
+const EventTimeline = ({
+  events,
+  onEventClick,
+  isLeftOpen,
+  mode,
+  setisLeftOpen,
+}) => {
   const sortedEvents = [...events].sort((a, b) => b.year - a.year);
 
   const Row = ({ index, style }) => {
@@ -26,9 +33,14 @@ const EventTimeline = ({ events, onEventClick, isLeftOpen, setisLeftOpen }) => {
           }}
           sx={{ cursor: "pointer" }}
         >
-          <div className="line-clamp-3 bg-white rounded-lg shadow-md hover:shadow-lg transition-shadow duration-300">
-            <h3 className="text-lg font-bold text-gray-800">{event.year}</h3>
-            <p className="text-sm text-gray-600">{event.title}</p>
+          <div  style={{
+                        backgroundColor: mode
+                          ? themes.light.sbackground
+                          : themes.dark.sbackground,
+                        color: mode ? themes.light.text : themes.dark.text,
+                      }} className="line-clamp-3 rounded-lg shadow-md hover:shadow-lg transition-shadow duration-300">
+            <h3 className="text-lg font-bold ">{event.year}</h3>
+            <p className="text-sm ">{event.title}</p>
           </div>
         </TimelineContent>
       </TimelineItem>

@@ -1,8 +1,9 @@
 import { Drawer } from "@mui/material";
 import { useState } from "react";
 import EventTimeline from "./EventTimeline";
+import { themes } from "../themes/colorThemes";
 
-const LeftDrawer = ({ isLeftOpen, setisLeftOpen, events ,onEventClick}) => {
+const LeftDrawer = ({ isLeftOpen, setisLeftOpen, events ,onEventClick, mode}) => {
   const toggleDrawer = (newOpen) => () => {
     setisLeftOpen(newOpen);
   };
@@ -18,7 +19,8 @@ const LeftDrawer = ({ isLeftOpen, setisLeftOpen, events ,onEventClick}) => {
           sx: {
             minWidth: '315px', 
             maxWidth: '30vw', 
-            backgroundColor: "#f7f7f7",
+            backgroundColor: mode?themes.light.background:themes.dark.primary ,
+            color: mode?themes.light.text:themes.dark.text ,
             boxShadow: "0 0 30px rgba(0, 0, 0, 0.1)",
             position: 'absolute', 
             left: '15px',
@@ -39,7 +41,7 @@ const LeftDrawer = ({ isLeftOpen, setisLeftOpen, events ,onEventClick}) => {
           <h2 className="text-lg font-semibold">Timeline</h2>
         </div>
         <div className= "">
-          <EventTimeline events={events} isLeftOpen={isLeftOpen} setisLeftOpen ={setisLeftOpen} onEventClick={onEventClick}/>
+          <EventTimeline mode={mode} events={events} isLeftOpen={isLeftOpen} setisLeftOpen ={setisLeftOpen} onEventClick={onEventClick}/>
         </div>
       </Drawer>
     </>

@@ -1,20 +1,17 @@
-// src/themes/colorThemes.js
 export const themes = {
-    light: {
-      primary: "#aad8aa",
-      secondary: "#326232",
-      background: "#FFE0B2",
-      accent: "#B4C7E7",
-      mapStyle: "https://api.maptiler.com/maps/streets/{z}/{x}/{y}.png"
-    },
-    dark: {
-      primary: "#2c3e50",
-      secondary: "#34495e",
-      background: "#1a1a1a",
-      accent: "#3498db",
-      mapStyle: "https://tiles.stadiamaps.com/tiles/alidade_smooth_dark/{z}/{x}/{y}{r}.png"
-    },
-  };
-  
-  
-  
+  light: {
+    primary: "#A9C3B9",    
+    secondary: "#2E7D32",  
+    background: "#F7F9F7", 
+    sbackground: "#E8F0E8", 
+    accent: "#5C6BC0",
+    text: '#000000',     
+  },
+  dark: {
+    primary: "#202124",    
+    secondary: "#42A5F5",  
+    background: "#18191B", 
+    accent: "#F48FB1",     
+    text: '#ffffff',     
+  },
+};

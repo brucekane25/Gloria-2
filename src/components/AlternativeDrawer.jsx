@@ -1,8 +1,9 @@
-import { SwipeableDrawer, IconButton } from "@mui/material";
+import { SwipeableDrawer, IconButton, Button } from "@mui/material";
 import MenuIcon from "@mui/icons-material/Menu";
 import { useState } from "react";
+import { themes } from "../themes/colorThemes";
 
-const AlternativeDrawer = ({ isSlider, setIsSlider, events, randomizeEvents, onEventClick }) => {
+const AlternativeDrawer = ({ isSlider, setIsSlider, events, randomizeEvents, onEventClick, mode }) => {
   return (
     <>
       <SwipeableDrawer
@@ -14,20 +15,31 @@ const AlternativeDrawer = ({ isSlider, setIsSlider, events, randomizeEvents, onE
         swipeAreaWidth={15} 
         sx={{
           "& .MuiDrawer-paper": {
-            backgroundColor: "rgba(1,1,1,0.5 )",
+            backgroundColor: !mode?themes.dark.background:themes.dark.background,
             boxShadow: "0 0 10px rgba(0, 0, 0, 0.1)",
           }, 
           
         }}
-      >
-        <div  className="flex items-center pb-3 mt-2 px-4 justify-between">
-          <h2 aria-label="close drawer" onClick={() => {setIsSlider(false)}} className="text-2xl text-white font-bold">Random Events</h2>
-          <button
+        >
+        <div style={{
+        // backgroundColor: !mode?themes.light.background:themes.dark.background,
+        color: !mode?themes.dark.text:themes.dark.text,
+        
+
+        }} className="flex items-center pb-3 mt-2 px-4 justify-between">
+          <h2 aria-label="close drawer" onClick={() => {setIsSlider(false)}} className="text-2xl font-bold">Random Events</h2>
+          <Button
             onClick={randomizeEvents}
-            className="px-4 mt-1 py-2 bg-blue-500 text-white rounded "
+            className="px-4 mt-5 py-2 rounded "
+            style={{
+              backgroundColor: mode
+                ? themes.light.sbackground
+                : themes.dark.sbackground,
+              color: mode ? themes.light.text : themes.dark.text,
+            }}
           >
             Randomize
-          </button>
+          </Button>
         </div>
 
         <div className="p-1 overflow-auto max-h-[60vh] min-w-[320px]">
@@ -35,7 +47,10 @@ const AlternativeDrawer = ({ isSlider, setIsSlider, events, randomizeEvents, onE
             {events.map((event) => (
               <li
                 key={event._id}
-                className="p-3 bg-white rounded shadow hover:shadow-lg transition-shadow cursor-pointer"
+                style={{ backgroundColor: mode?themes.dark.text:themes.dark.sbackground,
+                  color: mode?themes.light.text:themes.dark.text
+                }}
+                className="p-3 rounded shadow hover:shadow-lg transition-shadow cursor-pointer"
                 onClick={() => {
                   onEventClick(event);
                   setIsSlider(!isSlider)
@@ -61,7 +76,9 @@ const AlternativeDrawer = ({ isSlider, setIsSlider, events, randomizeEvents, onE
                     <h3 className="text-base font-medium line-clamp-2">
                       {event.title}
                     </h3>
-                    <p className="text-sm text-gray-600">{event.year}</p>
+                    <p  style={{ backgroundColor: mode?themes.light.background:themes.dark.background,
+                  color: mode?themes.light.text:themes.dark.text
+                }} className="w-fit px-1 text-sm ">{event.year}</p>
                   </div>
 
                   <div className="bg-gray-800 text-white text-sm px-2 py-1 rounded">
