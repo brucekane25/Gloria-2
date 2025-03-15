@@ -42,7 +42,7 @@ function App() {
   const [isLeftOpen, setisLeftOpen] = useState(false);
   const [isSlider, setIsSlider] = useState(false);
   const [country, setcountry] = useState();
-  const [mode, setmode] = useState(false);
+  const [mode, setmode] = useState(true);
   const [settings, setsettings] = useState(false);
 
   const StyledFab = styled(Fab)({
