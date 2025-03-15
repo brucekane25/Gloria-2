@@ -15,7 +15,9 @@ import { Icon, IconButton, useMediaQuery } from "@mui/material";
 import BottomAppBar from "./components/BottomBar";
 import LeftArrow from "@mui/icons-material/ArrowBackIosNewTwoTone";
 import RightArrow from "@mui/icons-material/ArrowForwardTwoTone";
+import  Close  from "@mui/icons-material/Close";
 import DownArrow from "@mui/icons-material/ArrowDownwardTwoTone";
+import Settings from "@mui/icons-material/Settings"
 import VerticalSlider from "./components/VerticalSlider";
 import { themes } from "./themes/colorThemes";
 import LeftDrawer from "./components/LeftDrawer";
@@ -180,7 +182,8 @@ function App() {
               }}
               color={mode ? "success" : "error"}
               >
-              {!settings ? <LeftArrow /> : <RightArrow />}
+              <Settings/>
+              {/* {!settings ? <LeftArrow /> : <RightArrow />} */}
             </StyledFab>
           </div>):(<></>)
             }
@@ -191,11 +194,14 @@ function App() {
     ${settings ? 'opacity-100' : 'opacity-0 pointer-events-none'}
     ${isDesktop ? 'right-10 mr-14 top-[53%] -translate-y-1/2 z-[999]' : ' h-[75vh] top-1/2 -translate-y-1/2 z-[9999]  left-1/2 -translate-x-1/2'}`}
 >
+
+
   <SettingsPanel
     isDesktop={isDesktop}
     setSelectedEvent={setSelectedEvent}
     yearRange={yearRange}
     setLimit={setLimit}
+    setsettings={setsettings}
     pages={pages}
     currentPage={currentPage}
     setCurrentPage={setCurrentPage}

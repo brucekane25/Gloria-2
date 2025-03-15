@@ -23,7 +23,7 @@ const MapComponent = ({ events, selectedEvent, mode }) => {
     shadowSize: [41, 41],
   });
 
-  const defaultPosition = [20.5937, 78.9629];
+  const defaultPosition = [0, 0];
   const markersRef = useRef({});
   const clusterGroupRef = useRef(null);
   const [filteredEvents, setFilteredEvents] = useState([]);
@@ -91,6 +91,33 @@ const MapComponent = ({ events, selectedEvent, mode }) => {
   // };
 
   useEffect(() => {
+    // Select the Leaflet zoom controls
+    const zoomInButton = document.querySelector(".leaflet-control-zoom-in");
+    const zoomOutButton = document.querySelector(".leaflet-control-zoom-out");
+    const layerControl = document.querySelector(".leaflet-control-layers");
+  
+    // Apply styles dynamically
+    if (zoomInButton && zoomOutButton) {
+      [zoomInButton, zoomOutButton].forEach((btn) => {
+        btn.style.backgroundColor = mode ? themes.light.background : themes.dark.background;
+        btn.style.color = mode ? "black" : "white";
+        btn.style.border = "none";
+        // btn.style.borderRadius = "8px";
+        btn.style.transition = "all 0.3s ease";
+      });
+    }
+  
+    if (layerControl) {
+      layerControl.style.backgroundColor = mode ?  themes.light.background : themes.dark.background;
+      // layerControl.style.color = mode === "dark" ? "#fff" : "#000";
+      layerControl.style.borderRadius = "8px";
+      layerControl.style.padding = "5px";
+    }
+  }, [mode]); // Runs whenever mode changes
+  
+
+
+  useEffect(() => {
     const mapContainer = document.querySelector(".leaflet-container");
     if (mapContainer) {
       mapContainer.style.backgroundColor = mode ? "white" : "black";
@@ -100,7 +127,7 @@ const MapComponent = ({ events, selectedEvent, mode }) => {
   return (
     <MapContainer
       center={defaultPosition}
-      zoom={2}
+      zoom={3}
       worldCopyJump={false}
       minZoom={2}
       maxBounds={[

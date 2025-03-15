@@ -10,7 +10,7 @@ import UpIcon from '@mui/icons-material/ArrowUpwardTwoTone';
 import MoonIcon from '@mui/icons-material/WbSunny'
 import SearchIcon from '@mui/icons-material/Search';
 import MoreIcon from '@mui/icons-material/Timeline';
-import CommitIcon from '@mui/icons-material/Commit';
+import CommitIcon from '@mui/icons-material/Settings';
 import { themes } from '../themes/colorThemes';
 
 const StyledFab = styled(Fab)({

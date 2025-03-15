@@ -8,6 +8,7 @@ import RightSliders from "./RightSliders";
 import { themes } from "../themes/colorThemes";
 // import world from "../assets/countries";
 import CategoryDropdown from "./CategoryDropdown";
+import { Close } from "@mui/icons-material";
 
 export default function SettingsPanel({
   isDesktop,
@@ -17,6 +18,7 @@ export default function SettingsPanel({
   setSelectedCategory,
   setSelectedEvent,
   setYearRange,
+  setsettings,
   setcountry,
   yearRange,
   pages,
@@ -45,10 +47,23 @@ export default function SettingsPanel({
          max-w-[550px]
         `}
     >
-      <header className="flex items-center mb-3">
-        <span className="text-3xl"> &gt; </span>
-        <h2 className="ml-2 text-3xl font-semibold">Tweaks</h2>
-      </header>
+      
+      <header className="flex items-center justify-between mb-3">
+  <div className="flex items-center">
+    <span className="text-3xl"> &gt; </span>
+    <h2 className="ml-2 text-3xl font-semibold">Tweaks</h2>
+  </div>
+  
+  <div
+    onClick={()=>{setsettings(false)}}
+    className={`rounded-full p-2 shadow-md cursor-pointer transition-all duration-300  focus:outline-none ${
+      mode ? 'text-black bg-white hover:bg-gray-200' : 'text-white bg-gray-800 hover:bg-gray-700'
+    }`}
+  >
+    <Close className="w-5 h-5" />
+  </div>
+</header>
+
 
       <section>
         {/* <div className="grid grid-cols-4 gap-4 mb-6">

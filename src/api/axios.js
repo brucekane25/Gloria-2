@@ -1,5 +1,5 @@
 import axios from 'axios';
-const back = import.meta.env.VITE_BACK
+// const back = import.meta.env.VITE_BACK
 // Base configuration for Axios
 const apiClient = axios.create({
   baseURL: 'https://historia-backend-2.onrender.com/api/events',
