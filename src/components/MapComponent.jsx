@@ -145,7 +145,7 @@ const MapComponent = ({ events, selectedEvent, mode }) => {
           />
         </LayersControl.Overlay>
 
-        <LayersControl.Overlay checked={mode} name="MapTiler">
+        <LayersControl.Overlay  name="MapTiler">
           <TileLayer
             attribution='<a href="https://www.maptiler.com/copyright">MapTiler</a>'
             url="https://api.maptiler.com/maps/streets/{z}/{x}/{y}.png?key=pUdLG48OR57uT9vDP5mK"
@@ -159,7 +159,7 @@ const MapComponent = ({ events, selectedEvent, mode }) => {
           />
         </LayersControl.Overlay>
 
-        <LayersControl.Overlay name="Detailed">
+        <LayersControl.Overlay checked={mode} name="Detailed">
           <TileLayer
             attribution='<a href="https://www.maptiler.com/copyright">ThunderForestMaps</a>'
             url="https://server.arcgisonline.com/ArcGIS/rest/services/World_Street_Map/MapServer/tile/{z}/{y}/{x}"

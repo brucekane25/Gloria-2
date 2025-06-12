@@ -15,9 +15,13 @@ import { Icon, IconButton, useMediaQuery } from "@mui/material";
 import BottomAppBar from "./components/BottomBar";
 import LeftArrow from "@mui/icons-material/ArrowBackIosNewTwoTone";
 import RightArrow from "@mui/icons-material/ArrowForwardTwoTone";
-import  Close  from "@mui/icons-material/Close";
+import Close from "@mui/icons-material/Close";
 import DownArrow from "@mui/icons-material/ArrowDownwardTwoTone";
-import Settings from "@mui/icons-material/Settings"
+import Settings from "@mui/icons-material/Settings";
+import SunIcon from "@mui/icons-material/WbSunny";
+import MoonIcon from "@mui/icons-material/DarkMode";
+import Dice from "@mui/icons-material/Casino";
+import Timeline from "@mui/icons-material/Timeline";
 import VerticalSlider from "./components/VerticalSlider";
 import { themes } from "./themes/colorThemes";
 import LeftDrawer from "./components/LeftDrawer";
@@ -85,7 +89,7 @@ function App() {
             ? categorizedEvents.filter((event) =>
                 selectedCategory.includes(event.category)
               )
-            : categorizedEvents; 
+            : categorizedEvents;
 
         setEvents(filterEvents);
         setPages(data.totalPages);
@@ -130,7 +134,7 @@ function App() {
       {!isDesktop && isSlider && (
         <div className="fixed z-[9999] bottom-[5vh] top-auto left-1/2 -translate-x-1/2">
           <button onClick={() => setIsSlider(!isSlider)}>
-            <StyledFab color={mode?'success':'error'}>
+            <StyledFab color={mode ? "success" : "error"}>
               <DownArrow />
             </StyledFab>
           </button>
@@ -152,16 +156,22 @@ function App() {
           style={{ backgroundColor: themes.light.primary }}
         >
           {isDesktop ? (
-            <Navbar
-              setSelectedEvent={setSelectedEvent}
-              isLeftOpen={isLeftOpen}
-              setisLeftOpen={setisLeftOpen}
-              isOpen={isOpen}
-              setIsOpen={setIsOpen}
-              mode={mode}
-              setmode={setmode}
-              setcountry={setcountry}
-            />
+            <div
+              className={`shadow-md  z-[99999999] ${
+                !mode ? `shadow-gray-600` : `shadow-black`
+              }`}
+            >
+              <Navbar
+                setSelectedEvent={setSelectedEvent}
+                isLeftOpen={isLeftOpen}
+                setisLeftOpen={setisLeftOpen}
+                isOpen={isOpen}
+                setIsOpen={setIsOpen}
+                mode={mode}
+                setmode={setmode}
+                setcountry={setcountry}
+              />
+            </div>
           ) : (
             <BottomAppBar
               isSlider={isSlider}
@@ -173,49 +183,117 @@ function App() {
               mode={mode}
               setmode={setmode}
             />
-          )}{isDesktop?(
-
-            <div className="absolute top-1/2 right-10 z-[999]">
-            <StyledFab
-              onClick={() => {
-                setsettings(!settings);
-              }}
-              color={mode ? "success" : "error"}
+          )}
+          {isDesktop ? (
+            <div className="absolute flex flex-col gap-2 bottom-[8%] right-6 z-[999]">
+              <StyledFab
+                title="Timeline"
+                onClick={() => {
+                  setisLeftOpen(!isLeftOpen);
+                }}
+                sx={{
+                  backgroundColor: mode ? themes.light.background : "gray",
+                  ":hover": {
+                    backgroundColor: mode
+                      ? themes.light.sbackground
+                      : themes.dark.background,
+                  },
+                }}
               >
-              <Settings/>
-              {/* {!settings ? <LeftArrow /> : <RightArrow />} */}
-            </StyledFab>
-          </div>):(<></>)
-            }
-          
+                <Timeline sx={{ color: !mode ? "white" : "black" }} />
+              </StyledFab>
+              <StyledFab
+                onClick={() => {
+                  setmode(!mode);
+                }}
+                title={`${mode ? `Dark Mode` : `Light Mode`}`}
+                sx={{
+                  backgroundColor: mode ? themes.light.background : "gray",
+                  ":hover": {
+                    backgroundColor: mode
+                      ? themes.light.sbackground
+                      : themes.dark.background,
+                  },
+                }}
+              >
+                {mode ? (
+                  <MoonIcon sx={{ color: !mode ? "white" : "black" }} />
+                ) : (
+                  <SunIcon sx={{ color: !mode ? "white" : "black" }} />
+                )}
+              </StyledFab>
+              <StyledFab
+                title="Random Events"
+                sx={{
+                  backgroundColor: mode ? themes.light.background : "gray",
+                  ":hover": {
+                    backgroundColor: mode
+                      ? themes.light.sbackground
+                      : themes.dark.background,
+                  },
+                }}
+                onClick={() => {
+                  setIsOpen(!isOpen);
+                }}
+              >
+                <Dice
+                  disableRipple
+                  sx={{
+                    color: !mode ? "white" : "black",
+                  }}
+                />
+              </StyledFab>
+              <StyledFab
+                title="Tweaks"
+                sx={{
+                  backgroundColor: mode ? themes.light.background : "gray",
+                  ":hover": {
+                    backgroundColor: mode
+                      ? themes.light.sbackground
+                      : themes.dark.background,
+                  },
+                }}
+                onClick={() => {
+                  setsettings(!settings);
+                }}
+              >
+                <Settings sx={{ color: !mode ? "white" : "black" }} />
+              </StyledFab>
+            </div>
+          ) : (
+            <></>
+          )}
+
           <div
-  className={`absolute sliders-cont flex flex-col items-center  
+            className={`absolute sliders-cont flex flex-col items-center  
     transition-opacity duration-500 ease-in-out 
-    ${settings ? 'opacity-100' : 'opacity-0 pointer-events-none'}
-    ${isDesktop ? 'right-10 mr-14 top-[53%] -translate-y-1/2 z-[999]' : ' h-[75vh] top-1/2 -translate-y-1/2 z-[9999]  left-1/2 -translate-x-1/2'}`}
->
-
-
-  <SettingsPanel
-    isDesktop={isDesktop}
-    setSelectedEvent={setSelectedEvent}
-    yearRange={yearRange}
-    setLimit={setLimit}
-    setsettings={setsettings}
-    pages={pages}
-    currentPage={currentPage}
-    setCurrentPage={setCurrentPage}
-    limit={limit}
-    filterTotalEvents={filterTotalEvents}
-    totalEvents={totalEvents}
-    setYearRange={setYearRange}
-    selectedCategory={selectedCategory}
-    country={country}
-    setcountry={setcountry}
-    setSelectedCategory={setSelectedCategory}
-    mode={mode}
-  />
-</div>
+    ${settings ? "opacity-100" : "opacity-0 pointer-events-none"}
+    ${
+      isDesktop
+        ? "right-10 mr-14 top-[53%] -translate-y-1/2 z-[999]"
+        : " h-[75vh] top-1/2 -translate-y-1/2 z-[9999]  left-1/2 -translate-x-1/2"
+    }`}
+          >
+            <SettingsPanel
+              isDesktop={isDesktop}
+              setSelectedEvent={setSelectedEvent}
+              yearRange={yearRange}
+              setLimit={setLimit}
+              setsettings={setsettings}
+              pages={pages}
+              currentPage={currentPage}
+              setCurrentPage={setCurrentPage}
+              limit={limit}
+              filterTotalEvents={filterTotalEvents}
+              totalEvents={totalEvents}
+              setYearRange={setYearRange}
+              selectedCategory={selectedCategory}
+              country={country}
+              setcountry={setcountry}
+              setSelectedCategory={setSelectedCategory}
+              mode={mode}
+            />
+          </div>
 
           {isDesktop ? (
             <Drawer
@@ -247,8 +325,6 @@ function App() {
           </div>
         </div>
       </div>
-      
-
     </>
   );
 }

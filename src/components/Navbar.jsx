@@ -45,6 +45,8 @@ function Navbar({
   };
 
   return (
+    <div className="">
+
     <AppBar
       position="sticky"
       sx={{
@@ -52,12 +54,12 @@ function Navbar({
         color: mode ? themes.light.text : themes.dark.text,
         backgroundColor: mode ? themes.light.primary : themes.dark.primary,
       }}
-    >
+      >
       <Container maxWidth="xl">
         <Toolbar
           className="flex items-center w-full justify-between"
           disableGutters
-        >
+          >
           <div className="flex items-center ">
             <AdbIcon sx={{ display: { xs: "none", md: "flex" }, mr: 1 }} />
             <Typography
@@ -73,23 +75,23 @@ function Navbar({
                 color: "inherit",
                 textDecoration: "none",
               }}
-            >
+              >
               Historia
             </Typography>
           </div>
           <div className="flex items-center gap-2">
-            <Button
+            {/* <Button
               onClick={() => {
                 setmode(!mode);
                 setcountry(null);
               }}
               style={{
                 backgroundColor: mode
-                  ? themes.light.background
-                  : themes.dark.background,
+                ? themes.light.background
+                : themes.dark.background,
                 color: mode ? themes.light.text : themes.dark.text,
               }}
-            >
+              >
               Theme Toggle
             </Button>
             <Button
@@ -99,11 +101,11 @@ function Navbar({
               }}
               style={{
                 backgroundColor: mode
-                  ? themes.light.background
-                  : themes.dark.background,
+                ? themes.light.background
+                : themes.dark.background,
                 color: mode ? themes.light.text : themes.dark.text,
               }}
-            >
+              >
               Timeline
             </Button>
             <Button
@@ -113,13 +115,13 @@ function Navbar({
               }}
               style={{
                 backgroundColor: mode
-                  ? themes.light.background
-                  : themes.dark.background,
+                ? themes.light.background
+                : themes.dark.background,
                 color: mode ? themes.light.text : themes.dark.text,
               }}
-            >
+              >
               Random Events
-            </Button>
+            </Button> */}
             <Box sx={{ flexGrow: 0, display: { xs: "flex", md: "none" } }}>
               <IconButton
                 size="large"
@@ -127,7 +129,7 @@ function Navbar({
                 aria-controls="menu-appbar"
                 aria-haspopup="true"
                 color="inherit"
-              >
+                >
                 <MenuIcon />
               </IconButton>
               <Menu
@@ -145,14 +147,14 @@ function Navbar({
                 open={Boolean(anchorElNav)}
                 onClose={handleCloseNavMenu}
                 sx={{ display: { xs: "block", md: "none" } }}
-              ></Menu>
+                ></Menu>
             </Box>
             <Box sx={{ flexGrow: 0 }}>
               <Tooltip title="Github Page">
                 <IconButton
                   href="https://github.com/brucekane25/"
                   sx={{ p: 0 }}
-                >
+                  >
                   <GithubIcon />
                 </IconButton>
               </Tooltip>
@@ -161,6 +163,7 @@ function Navbar({
         </Toolbar>
       </Container>
     </AppBar>
+                  </div> 
   );
 }
 
