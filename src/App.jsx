@@ -26,11 +26,13 @@ import VerticalSlider from "./components/VerticalSlider";
 import { themes } from "./themes/colorThemes";
 import LeftDrawer from "./components/LeftDrawer";
 import SettingsPanel from "./components/SettingsPanel";
+import SettingsIcons from "./components/SettingsIcons";
 function App() {
   const [events, setEvents] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
   const [pages, setPages] = useState(1);
   const [filterpages, setFilterPages] = useState(0);
+  const [panel, setPanel] = useState(false);
   const [limit, setLimit] = useState(2200);
   const [selectedCategory, setSelectedCategory] = useState([]);
   const [randomEvents, setRandomEvents] = useState([]);
@@ -184,84 +186,20 @@ function App() {
               setmode={setmode}
             />
           )}
-          {isDesktop ? (
-            <div className="absolute flex flex-col gap-2 bottom-[8%] right-6 z-[999]">
-              <StyledFab
-                title="Timeline"
-                onClick={() => {
-                  setisLeftOpen(!isLeftOpen);
-                }}
-                sx={{
-                  backgroundColor: mode ? themes.light.background : "gray",
-                  ":hover": {
-                    backgroundColor: mode
-                      ? themes.light.sbackground
-                      : themes.dark.background,
-                  },
-                }}
-              >
-                <Timeline sx={{ color: !mode ? "white" : "black" }} />
-              </StyledFab>
-              <StyledFab
-                onClick={() => {
-                  setmode(!mode);
-                }}
-                title={`${mode ? `Dark Mode` : `Light Mode`}`}
-                sx={{
-                  backgroundColor: mode ? themes.light.background : "gray",
-                  ":hover": {
-                    backgroundColor: mode
-                      ? themes.light.sbackground
-                      : themes.dark.background,
-                  },
-                }}
-              >
-                {mode ? (
-                  <MoonIcon sx={{ color: !mode ? "white" : "black" }} />
-                ) : (
-                  <SunIcon sx={{ color: !mode ? "white" : "black" }} />
-                )}
-              </StyledFab>
-              <StyledFab
-                title="Random Events"
-                sx={{
-                  backgroundColor: mode ? themes.light.background : "gray",
-                  ":hover": {
-                    backgroundColor: mode
-                      ? themes.light.sbackground
-                      : themes.dark.background,
-                  },
-                }}
-                onClick={() => {
-                  setIsOpen(!isOpen);
-                }}
-              >
-                <Dice
-                  disableRipple
-                  sx={{
-                    color: !mode ? "white" : "black",
-                  }}
-                />
-              </StyledFab>
-              <StyledFab
-                title="Tweaks"
-                sx={{
-                  backgroundColor: mode ? themes.light.background : "gray",
-                  ":hover": {
-                    backgroundColor: mode
-                      ? themes.light.sbackground
-                      : themes.dark.background,
-                  },
-                }}
-                onClick={() => {
-                  setsettings(!settings);
-                }}
-              >
-                <Settings sx={{ color: !mode ? "white" : "black" }} />
-              </StyledFab>
-            </div>
-          ) : (
-            <></>
+          {isDesktop && (
+
+            <SettingsIcons
+            panel={panel}
+            setPanel={setPanel}
+            setisLeftOpen={setisLeftOpen}
+            isLeftOpen={isLeftOpen}
+            setmode={setmode}
+            mode={mode}
+            setIsOpen={setIsOpen}
+            isOpen={isOpen}
+            setsettings={setsettings}
+            settings={settings}
+            />
           )}
 
           <div
