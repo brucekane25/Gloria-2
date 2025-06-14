@@ -2,6 +2,8 @@ import { Button, Drawer, IconButton, SwipeableDrawer } from "@mui/material";
 import MenuIcon from "@mui/icons-material/Menu";
 import { useEffect, useState } from "react";
 import { themes } from "../themes/colorThemes";
+import { styled, Fab } from "@mui/material";
+import { Cancel, Casino, Handyman } from "@mui/icons-material";
 
 const Pane = ({
   isOpen,
@@ -12,6 +14,10 @@ const Pane = ({
   randomizeEvents,
   onEventClick,
 }) => {
+  const StyledFab = styled(Fab)({
+    margin: "0 auto",
+  });
+
   return (
     <>
       <Drawer
@@ -31,18 +37,41 @@ const Pane = ({
       >
         <div className="flex items-center mt-3 px-4 pb-3 justify-between">
           <h2 className="text-lg font-semibold">Random Events</h2>
-          <Button
-            onClick={randomizeEvents}
-            style={{
-              backgroundColor: mode
-                ? themes.light.sbackground
-                : themes.dark.sbackground,
-              color: mode ? themes.light.text : themes.dark.text,
-            }}
-            className="px-4 py-2"
-          >
-            Randomize
-          </Button>
+          <div className="flex gap-1 justify-normal items-center">
+            <Button
+              onClick={randomizeEvents}
+              style={{
+                backgroundColor: mode
+                  ? themes.light.sbackground
+                  : themes.dark.sbackground,
+                color: mode ? themes.light.text : themes.dark.text,
+              }}
+              className="px-4 py-2 flex gap-1"
+            >
+              <Casino/>
+              Randomize
+            </Button>
+            <StyledFab
+
+              title="Close"
+              onClick={() => {
+                setIsOpen(false);
+              }}
+              sx={{
+                height:'20px',
+                width:'20px',
+                padding:'20px',
+                backgroundColor: mode ? themes.light.background : "gray",
+                ":hover": {
+                  backgroundColor: mode
+                    ? themes.light.sbackground
+                    : themes.dark.background,
+                },
+              }}
+            >
+              <Cancel sx={{ color: !mode ? "white" : "black" }} />
+            </StyledFab>
+          </div>
         </div>
 
         <div className="p-4 overflow-y-auto">
