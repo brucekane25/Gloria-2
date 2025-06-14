@@ -80,48 +80,7 @@ function Navbar({
             </Typography>
           </div>
           <div className="flex items-center gap-2">
-            {/* <Button
-              onClick={() => {
-                setmode(!mode);
-                setcountry(null);
-              }}
-              style={{
-                backgroundColor: mode
-                ? themes.light.background
-                : themes.dark.background,
-                color: mode ? themes.light.text : themes.dark.text,
-              }}
-              >
-              Theme Toggle
-            </Button>
-            <Button
-              onClick={() => {
-                setisLeftOpen(!isLeftOpen);
-                setSelectedEvent(null);
-              }}
-              style={{
-                backgroundColor: mode
-                ? themes.light.background
-                : themes.dark.background,
-                color: mode ? themes.light.text : themes.dark.text,
-              }}
-              >
-              Timeline
-            </Button>
-            <Button
-              onClick={() => {
-                setIsOpen(!isOpen);
-                setSelectedEvent(null);
-              }}
-              style={{
-                backgroundColor: mode
-                ? themes.light.background
-                : themes.dark.background,
-                color: mode ? themes.light.text : themes.dark.text,
-              }}
-              >
-              Random Events
-            </Button> */}
+          
             <Box sx={{ flexGrow: 0, display: { xs: "flex", md: "none" } }}>
               <IconButton
                 size="large"
@@ -153,9 +112,9 @@ function Navbar({
               <Tooltip title="Github Page">
                 <IconButton
                   href="https://github.com/brucekane25/"
-                  sx={{ p: 0 }}
+                  sx={{ p: 0 ,color: mode? themes.light.text:themes.dark.text}}
                   >
-                  <GithubIcon />
+                  <GithubIcon className="scale-150"/>
                 </IconButton>
               </Tooltip>
             </Box>

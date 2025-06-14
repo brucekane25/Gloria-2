@@ -159,7 +159,7 @@ function App() {
         >
           {isDesktop ? (
             <div
-              className={`shadow-md  z-[99999999] ${
+              className={`shadow-md  z-[99999] ${
                 !mode ? `shadow-gray-600` : `shadow-black`
               }`}
             >
