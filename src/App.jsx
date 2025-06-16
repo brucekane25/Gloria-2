@@ -145,6 +145,7 @@ function App() {
 
       <div className="main-cont h-screen w-screen overflow-hidden">
         <LeftDrawer
+        isDesktop={isDesktop}
           setisLeftOpen={setisLeftOpen}
           isLeftOpen={isLeftOpen}
           mode={mode}
