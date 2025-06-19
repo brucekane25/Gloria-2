@@ -53,7 +53,7 @@ git clone https://github.com/brucekane25/Gloria-2/
 ```
 2. **Install the node modules**
 ```bash
-cd Frontend
+cd Gloria-2
 npm i
 ```
 3. **Run the development server**
